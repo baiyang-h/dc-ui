@@ -1,18 +1,26 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <button @click="show">click</button>
+    <div id="text">{{ a }}</div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
-  }
+  data() {
+    return {
+      a: 1
+    }
+  },
+  methods: {
+    show() {
+      this.a = 2
+      console.log('前：', document.getElementById('text').innerHTML)
+      this.$nextTick(function () {
+        console.log('后：', document.getElementById('text').innerHTML)
+      })
+    }
+  },
 }
 </script>
