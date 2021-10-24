@@ -1,22 +1,41 @@
 <template>
   <div class="jw-input" :style="[wrapStyle]">
-    <el-input
-      v-bind="$attrs"
-      v-on="filterListeners"
-      :type="type"2
-      :value="value"
-      @input="input"
-      @change="change"
-    >
-      <template v-for="key in Object.keys($slots)" :slot="key">
-        <slot :name="key"></slot>
-      </template>
-    </el-input>
+    <div class="jw-input-content" v-if="type === 'service'">
+      <service-input
+        :value="value"
+        :options="options"
+        v-bind="$attrs"
+        v-on="$listeners"
+      >
+        <template v-for="key in Object.keys($slots)" :slot="key">
+          <slot :name="key"></slot>
+        </template>
+        <template v-slot="{ item }">
+          <slot :item="item"></slot>
+        </template>
+      </service-input>
+    </div>
+    <div class="jw-input-content" v-else>
+      <el-input
+          ref="input"
+          v-bind="$attrs"
+          v-on="filterListeners"
+          :type="type"
+          :value="value"
+          @input="input"
+          @change="change"
+      >
+        <template v-for="key in Object.keys($slots)" :slot="key">
+          <slot :name="key"></slot>
+        </template>
+      </el-input>
+    </div>
   </div>
 </template>
 
 <script>
 import { isRegExp } from '@/utils/function/type'
+import serviceInput from './serviceInput'
 
 /**
  * @description
@@ -28,6 +47,9 @@ import { isRegExp } from '@/utils/function/type'
  */
 export default {
   name: "jw-input",
+  components: {
+    serviceInput
+  },
   emits: ['input'],
   props: {
     value: {
@@ -45,6 +67,11 @@ export default {
         if(!isRegExp(value)) console.error('reg需是一个正则')
         return isRegExp(value)
       }
+    },
+    // 这是当 type=service 时，模糊查询时，表单默认初始显示的下拉框
+    options: {
+      type: Array,
+      default: () => []
     }
   },
   computed: {
@@ -58,9 +85,6 @@ export default {
       style.width = this.$jw.addUnit(this.width)
       return style
     }
-  },
-  mounted() {
-
   },
   methods: {
     input(value) {
@@ -76,11 +100,6 @@ export default {
         this.$emit('input', this.reg.test(value) ? value : '')
       }
     }
-  }
-
+  },
 }
 </script>
-
-<style scoped>
-
-</style>
