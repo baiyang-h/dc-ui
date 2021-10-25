@@ -1,12 +1,20 @@
 // 所有组件入口
-import JwInput from '../packages/jw-input'
-import JwSearch from '../packages/jw-search';
+import JwInput from '../packages/input'
+import JwInputNumber from '../packages/input-number';
+import JwRadio from '../packages/radio';
+import JwRadioButton from '../packages/radio-button';
+import JwRadioGroup from '../packages/radio-group';
+import JwSearch from '../packages/search';
 
 import filterObject from './utils/function/filterObject'
 import addUnit from './utils/function/addUnit'
 
 const components = [
   JwInput,
+  JwInputNumber,
+  JwRadio,
+  JwRadioButton,
+  JwRadioGroup,
   JwSearch,
 ]
 

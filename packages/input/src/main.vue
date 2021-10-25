@@ -38,19 +38,25 @@ import { isRegExp } from '@/utils/function/type'
 import serviceInput from './serviceInput'
 
 /**
- * @description
+ * @description input 输入框
  *
- * @property {String}
- * @event {Function}
+ * @property {String} value 输入值
+ * @property {String} type 类型，有 text、number、textarea、service（其中number时，只能输入数字、service为带提示的输入框）
+ * @property {String | Number} width 输入框长度，可以是 100、100px、100%、auto
+ * @property {RegExp} reg 正则表达式，输入框在 change 事件时，进行判断，如果不匹配则置为空
+ * @property {Array} options 使用与 type=service 详见service-input组件内部说明
  *
- * @example
+ * @slot 可传入插槽
+ *
+ * @event {Function} input v-model语法糖
+ *
+ * @example <jw-input v-model="text" width="800" />
  */
 export default {
   name: "jw-input",
   components: {
     serviceInput
   },
-  emits: ['input'],
   props: {
     value: {
       type: String,
@@ -58,10 +64,9 @@ export default {
     },
     type: {
       type: String,
-      default: 'text',  // 常规以下几种类型：text、number、textarea
+      default: 'text',  // 常规以下几种类型：text、number、textarea、service
     },
     width: [String, Number],
-    height: [String, Number],
     reg: {
       validator(value) {
         if(!isRegExp(value)) console.error('reg需是一个正则')

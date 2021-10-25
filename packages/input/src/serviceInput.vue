@@ -19,9 +19,14 @@
 </template>
 
 <script>
+/**
+ * @description input 一个可带输入建议的输入框组件
+ * @property {String} value input上输入的值
+ * @property {Array} options 这是建议显示的列表，列表中的item中要有 value 属性（默认），[{value: xx, ...}]，可以通过valueKey修改。 也可以通过 <slot></slot> 插槽的方式传入列表
+ * @example <jw-input type="service" v-model="text" :options="options" @select="handleSelect" />
+ */
 export default {
   name: "service-input",
-  emits: ['input'],
   props: {
     value: {
       type: String,
