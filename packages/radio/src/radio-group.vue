@@ -1,5 +1,5 @@
 <template>
-  <div class="jw-radio-group">
+  <div class="jw-radio-group jw-inline-block">
     <el-radio-group
       v-bind="$attrs"
       v-on="$listeners"
@@ -28,6 +28,8 @@
  *    - 直接一个数组 ['上海', '北京'], value和label都为数组中的值
  *    - ['上海', {value: 1, label: '上海'}, {value: 333}]
  * @property {String} mode 当jw-radio-group是通过options配置的方式时，有普通形式展示和按钮形式展示，默认不同单选形式，mode="radio"(默认)、mode="button"
+ *
+ * @example <jw-radio-group v-model="radio3" size="small">xxxx</jw-radio-group>
  */
 export default {
   name: "jw-radio-group",

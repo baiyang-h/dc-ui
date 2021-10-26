@@ -197,3 +197,15 @@ export default {
 
 ```
 
+
+## Input Attributes
+
+| 属性 | 说明 |
+| ---- | ---- |
+| v-model    |    |
+| type    |  text、number(只能输入数字)、textarea、service(存在模糊搜索功能)   |
+| width    |   100、100px、100%、auto  |
+| reg    |   RegExp，change事件时触发  |
+| options    |   当type=service时，传入的[{value, label}]数据  |
+
+

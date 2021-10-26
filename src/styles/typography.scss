@@ -1,0 +1,58 @@
+/**
+ * 对字体进行统一规范
+ * - 字体大小
+ * - 字体类型
+ * - 行高等
+ *
+ * 字体大小快捷类 和 字体大小数字类 12-30px
+ */
+
+.jw-pf-med {
+  font-family: PingFangSC-Medium, PingFang SC;
+}
+
+.jw-pf-reg {
+  font-family: PingFangSC-Regular, PingFang SC;
+}
+
+.jw-dinal-bold {
+  font-family: DINAlternate-Bold, DINAlternate;
+}
+
+// 辅助文字
+.jw-font-xs {
+  font-size: 12px;
+}
+
+// 正文（小）
+.jw-font-sm {
+  font-size: 13px;
+}
+
+// 常规正文是 14px 这里就不设置了 默认全局设置 14px
+
+// 小标题
+.jw-font-md {
+  font-size: 16px;
+}
+
+// 标题
+.jw-font-lg {
+  font-size: 18px;
+}
+
+// 主标题
+.jw-font-xl {
+  font-size: 20px;
+}
+
+// 定义字体(px)单位，12~30都为px单位字体
+@for $i from 12 to 30 {
+  .jw-font-#{$i} {
+    font-size: $i + px;
+  }
+}
+
+
+
+

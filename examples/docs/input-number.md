@@ -30,3 +30,11 @@
 ></jw-input-number>
 ```
 
+
+## InputNumber Attributes
+
+| 属性 | 说明 |
+| ---- | ---- |
+| v-model    |    |
+| align    |  当controls=false时，按钮不显示，InputNumber输入框文本内容位置显示   |
+

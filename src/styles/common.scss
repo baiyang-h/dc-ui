@@ -1,0 +1,56 @@
+/*
+ * - 定位属性：relative、absolute
+ * - padding 和 margin 快捷类，缩写，全写两种形式， 主要是能被2整除、5整除。例如：jw-m-10, jw-margin-10, jw-p-l-4, jw-padding-left-4
+ */
+
+.jw-relative, .jw-rela {
+  position: relative;
+}
+
+.jw-absolute, .jw-abso {
+  position: absolute;
+}
+
+.jw-inline-block {
+  display: inline-block;
+}
+
+// 定义内外边距，历遍1-80
+@for $i from 0 through 80 {
+  // 只要双数和能被5除尽的数
+  @if $i % 2 == 0 or $i % 5 == 0 {
+    // 如：jw-margin-30或者jw-m-30
+    .jw-margin-#{$i}, .jw-m-#{$i} {
+      margin: $i + rpx!important;
+    }
+
+    // 如：jw-padding-30或者jw-p-30
+    .jw-padding-#{$i}, .jw-p-#{$i} {
+      padding: $i + rpx!important;
+    }
+
+    @each $short, $long in l left, t top, r right, b bottom {
+      // 缩写版，结果如： jw-m-l-30
+      // 定义外边距
+      .jw-m-#{$short}-#{$i} {
+        margin-#{$long}: $i + rpx!important;
+      }
+
+      // 定义内边距
+      .jw-p-#{$short}-#{$i} {
+        padding-#{$long}: $i + rpx!important;
+      }
+
+      // 完整版，结果如：jw-margin-left-30
+      // 定义外边距
+      .jw-margin-#{$long}-#{$i} {
+        margin-#{$long}: $i + rpx!important;
+      }
+
+      // 定义内边距
+      .jw-padding-#{$long}-#{$i} {
+        padding-#{$long}: $i + rpx!important;
+      }
+    }
+  }
+}

@@ -9,11 +9,11 @@
 </template>
 
 <script>
+/**
+ * @description 复选框按钮，在组内部使用
+ * @example <jw-checkbox-button v-model="checked">备选项</jw-checkbox-button>
+ */
 export default {
   name: "jw-checkbox-button"
 }
 </script>
-
-<style scoped>
-
-</style>

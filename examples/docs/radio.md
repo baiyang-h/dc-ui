@@ -68,12 +68,12 @@
 
 ```vue
 <template>
-	<jw-radio-group v-model="radio1">
+  <jw-radio-group v-model="radio1">
     <jw-radio-button label="上海"></jw-radio-button>
     <jw-radio-button label="北京"></jw-radio-button>
     <jw-radio-button label="广州"></jw-radio-button>
     <jw-radio-button label="深圳"></jw-radio-button>
-  </el-radio-group>
+  </jw-radio-group>
 </template>
 
 <script>
@@ -92,12 +92,14 @@
 ## 按钮样式配置方式
 
 ```vue
-<jw-radio-group 
-	v-model="radio" 
-  :options="options" 
-  @change="change"
->
-</jw-radio-group>
+<template>
+  <jw-radio-group
+      v-model="radio"
+      :options="options"
+      @change="change"
+  >
+  </jw-radio-group>
+</template>
 
 <script>
 export default {
@@ -127,7 +129,7 @@ export default {
 ]
 
 // 会转为 [{value: 1111, label: 1111 }, {value: 2222, label: 2222 }, {value: 3333, label: 3333 },]
-[2
+[
   1111,
   2222,
   3333,
@@ -147,7 +149,7 @@ export default {
 
 ```vue
 <jw-radio-group 
-	v-model="radio" 
+  v-model="radio" 
   :options="options" 
   mode="button"
   @change="change"
@@ -156,7 +158,7 @@ export default {
 
 // 默认 不写 为 radio
 <jw-radio-group 
-	v-model="radio" 
+  v-model="radio" 
   :options="options" 
   mode="radio"
   @change="change"
@@ -180,7 +182,7 @@ size: medium / small / mini
       <jw-radio-button label="北京"></jw-radio-button>
       <jw-radio-button label="广州"></jw-radio-button>
       <jw-radio-button label="深圳"></jw-radio-button>
-    </el-radio-group>
+    </jw-radio-group>
   </div>
   <div style="margin-top: 20px">
     <jw-radio-group v-model="radio2" size="medium">
@@ -196,7 +198,7 @@ size: medium / small / mini
       <jw-radio-button label="北京" disabled ></jw-radio-button>
       <jw-radio-button label="广州"></jw-radio-button>
       <jw-radio-button label="深圳"></jw-radio-button>
-    </el-radio-group>
+    </jw-radio-group>
   </div>
   <div style="margin-top: 20px">
     <jw-radio-group v-model="radio4" disabled size="mini">
@@ -244,3 +246,11 @@ size: medium / small / mini
   }
 </script>
 ```
+
+
+## Radio-group Attributes
+
+| 属性 | 说明 |
+| ---- | ---- |
+| options    | 配置项，value、label   |
+| mode    | 组类型，radio、button，默认radio    |

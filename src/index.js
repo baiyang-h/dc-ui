@@ -4,10 +4,13 @@ import JwInputNumber from '../packages/input-number';
 import JwRadio from '../packages/radio';
 import JwRadioButton from '../packages/radio-button';
 import JwRadioGroup from '../packages/radio-group';
-import JwCheckbox from '../packages/checkbox'
-import JwCheckboxButton from '../packages/checkbox-button'
-import JwCheckboxGroup from '../packages/checkbox-group'
-import JwSearch from '../packages/search';
+import JwCheckbox from '../packages/checkbox';
+import JwCheckboxButton from '../packages/checkbox-button';
+import JwCheckboxGroup from '../packages/checkbox-group';
+import JwSelect from '../packages/select';
+import JwOption from '../packages/option';
+import JwOptionGroup from '../packages/option-group';
+// import JwSearch from '../packages/search';
 
 import filterObject from './utils/function/filterObject'
 import addUnit from './utils/function/addUnit'
@@ -21,7 +24,10 @@ const components = [
   JwCheckbox,
   JwCheckboxButton,
   JwCheckboxGroup,
-  JwSearch,
+  JwSelect,
+  JwOption,
+  JwOptionGroup,
+  // JwSearch,
 ]
 
 const $jw = {

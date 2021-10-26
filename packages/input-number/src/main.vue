@@ -1,5 +1,5 @@
 <template>
-  <div class="jw-input-number" :class="wrapAlign">
+  <div class="jw-input-number jw-inline-block" :class="wrapAlign">
     <el-input-number
       ref="inputNumber"
       v-bind="$attrs"

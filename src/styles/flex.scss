@@ -1,0 +1,78 @@
+/**
+ * - 布局相关, 弹性布局快捷类
+ * - 文字对齐快捷类
+ */
+
+.flex {
+  display: flex;
+}
+
+.jw-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.jw-flex-wrap {
+  flex-wrap: wrap;
+}
+
+.jw-flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.jw-col-center {
+  align-items: center;
+}
+
+.jw-col-top {
+  align-items: flex-start;
+}
+
+.jw-col-bottom {
+  align-items: flex-end;
+}
+
+.jw-row-center {
+  justify-content: center;
+}
+
+.jw-row-left {
+  justify-content: flex-start;
+}
+
+.jw-row-right {
+  justify-content: flex-end;
+}
+
+.jw-row-between {
+  justify-content: space-between;
+}
+
+.jw-row-around {
+  justify-content: space-around;
+}
+
+.jw-text-left {
+  text-align: left;
+}
+
+.jw-text-center {
+  text-align: center;
+}
+
+.jw-text-right {
+  text-align: right;
+}
+
+.jw-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+// 定义flex等分
+@for $i from 0 through 12 {
+  .jw-flex-#{$i} {
+    flex: $i;
+  }
+}
