@@ -4,6 +4,9 @@ import JwInputNumber from '../packages/input-number';
 import JwRadio from '../packages/radio';
 import JwRadioButton from '../packages/radio-button';
 import JwRadioGroup from '../packages/radio-group';
+import JwCheckbox from '../packages/checkbox'
+import JwCheckboxButton from '../packages/checkbox-button'
+import JwCheckboxGroup from '../packages/checkbox-group'
 import JwSearch from '../packages/search';
 
 import filterObject from './utils/function/filterObject'
@@ -15,6 +18,9 @@ const components = [
   JwRadio,
   JwRadioButton,
   JwRadioGroup,
+  JwCheckbox,
+  JwCheckboxButton,
+  JwCheckboxGroup,
   JwSearch,
 ]
 
