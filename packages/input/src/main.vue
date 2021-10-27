@@ -1,36 +1,36 @@
 <template>
-  <div class="jw-input" :style="[wrapStyle]">
-    <div class="jw-input-content" v-if="type === 'service'">
-      <service-input
-        :value="value"
-        :options="options"
-        v-bind="$attrs"
-        v-on="$listeners"
-      >
-        <template v-for="key in Object.keys($slots)" :slot="key">
-          <slot :name="key"></slot>
-        </template>
-        <template v-slot="{ item }">
-          <slot :item="item"></slot>
-        </template>
-      </service-input>
-    </div>
-    <div class="jw-input-content" v-else>
-      <el-input
-          ref="input"
-          v-bind="$attrs"
-          v-on="filterListeners"
-          :type="type"
-          :value="value"
-          @input="input"
-          @change="change"
-      >
-        <template v-for="key in Object.keys($slots)" :slot="key">
-          <slot :name="key"></slot>
-        </template>
-      </el-input>
-    </div>
-  </div>
+  <service-input
+    v-if="type === 'service'"
+    class="jw-input"
+    :style="[wrapStyle]"
+    :value="value"
+    :options="options"
+    v-bind="$attrs"
+    v-on="$listeners"
+  >
+    <template v-for="key in Object.keys($slots)" :slot="key">
+      <slot :name="key"></slot>
+    </template>
+    <template v-slot="{ item }">
+      <slot :item="item"></slot>
+    </template>
+  </service-input>
+  <el-input
+    v-else
+    ref="input"
+    class="jw-input"
+    :style="[wrapStyle]"
+    v-bind="$attrs"
+    v-on="filterListeners"
+    :type="type"
+    :value="value"
+    @input="input"
+    @change="change"
+  >
+    <template v-for="key in Object.keys($slots)" :slot="key">
+      <slot :name="key"></slot>
+    </template>
+  </el-input>
 </template>
 
 <script>
@@ -87,7 +87,7 @@ export default {
     wrapStyle() {
       const style = {};
       // 通过调用addUnit()方法，如果有单位，如百分比、px单位等，直接返回，如果是纯粹的数值，则加上px单位
-      style.width = this.$jw.addUnit(this.width)
+      if(this.width) style.width = this.$jw.addUnit(this.width)
       return style
     }
   },

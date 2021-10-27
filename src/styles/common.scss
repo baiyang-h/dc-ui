@@ -11,10 +11,6 @@
   position: absolute;
 }
 
-.jw-inline-block {
-  display: inline-block;
-}
-
 // 定义内外边距，历遍1-80
 @for $i from 0 through 80 {
   // 只要双数和能被5除尽的数

@@ -1,8 +1,8 @@
 <template>
   <el-radio
+    class="jw-radio"
     v-bind="$attrs"
     v-on="$listeners"
-    class="jw-radio"
   >
     <slot></slot>
   </el-radio>

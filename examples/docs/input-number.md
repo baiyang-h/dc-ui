@@ -37,4 +37,5 @@
 | ---- | ---- |
 | v-model    |    |
 | align    |  当controls=false时，按钮不显示，InputNumber输入框文本内容位置显示   |
+| width    |  表单控件长度，100、'100'、100%、'auto' （默认180px）   |
 

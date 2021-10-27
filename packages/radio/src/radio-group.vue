@@ -1,23 +1,22 @@
 <template>
-  <div class="jw-radio-group jw-inline-block">
-    <el-radio-group
-      v-bind="$attrs"
-      v-on="$listeners"
-    >
-      <div v-if="options">
-        <components
-          v-for="(item, index) in genOptions"
-          :is="getRadioTypeName"
-          :label="item.value"
-          v-bind="getRadioAttrs(item)"
-          :key="index"
-        >
-          {{item.label}}
-        </components>
-      </div>
-      <slot v-else></slot>
-    </el-radio-group>
-  </div>
+  <el-radio-group
+    class="jw-radio-group"
+    v-bind="$attrs"
+    v-on="$listeners"
+  >
+    <div v-if="options">
+      <components
+        v-for="(item, index) in genOptions"
+        :is="getRadioTypeName"
+        :label="item.value"
+        v-bind="getRadioAttrs(item)"
+        :key="index"
+      >
+        {{item.label}}
+      </components>
+    </div>
+    <slot v-else></slot>
+  </el-radio-group>
 </template>
 
 <script>

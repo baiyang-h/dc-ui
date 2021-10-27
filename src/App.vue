@@ -1,24 +1,21 @@
 <template>
   <div>
-    <el-select v-model="value" placeholder="请选择" ref="aaa">
+    <el-select v-model="value" placeholder="请选择">
       <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
       </el-option>
     </el-select>
-    1
-    <jw-select v-model="value" placeholder="请选择" @change="change" ref="aaa">
+    <jw-select v-model="value" placeholder="请选择">
       <jw-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      >
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
       </jw-option>
     </jw-select>
-    1
   </div>
 </template>
 
@@ -43,14 +40,6 @@ export default {
         label: '北京烤鸭'
       }],
       value: ''
-    }
-  },
-  mounted() {
-    console.log(this.$refs)
-  },
-  methods: {
-    change(v) {
-      console.log(v)
     }
   }
 }

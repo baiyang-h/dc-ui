@@ -94,9 +94,9 @@
 ```vue
 <template>
   <jw-radio-group
-      v-model="radio"
-      :options="options"
-      @change="change"
+    v-model="radio"
+    :options="options"
+    @change="change"
   >
   </jw-radio-group>
 </template>

@@ -1,23 +1,22 @@
 <template>
-  <div class="jw-checkbox-group">
-    <el-checkbox-group
-      v-bind="$attrs"
-      v-on="$listeners"
-    >
-      <div v-if="options">
-        <components
-            v-for="(item, index) in genOptions"
-            :is="getRadioTypeName"
-            :label="item.value"
-            v-bind="getRadioAttrs(item)"
-            :key="index"
-        >
-          {{item.label}}
-        </components>
-      </div>
-      <slot v-else></slot>
-    </el-checkbox-group>
-  </div>
+  <el-checkbox-group
+    class="jw-checkbox-group"
+    v-bind="$attrs"
+    v-on="$listeners"
+  >
+    <div v-if="options">
+      <components
+        v-for="(item, index) in genOptions"
+        :is="getRadioTypeName"
+        :label="item.value"
+        v-bind="getRadioAttrs(item)"
+        :key="index"
+      >
+        {{item.label}}
+      </components>
+    </div>
+    <slot v-else></slot>
+  </el-checkbox-group>
 </template>
 
 <script>

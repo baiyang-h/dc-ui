@@ -1,28 +1,28 @@
 ```vue
 // 文本框
 <jw-input
-	v-model="text"
-	width="800"
+  v-model="text"
+  width="800"
 >
-	<i class="el-icon-edit el-input__icon" slot="suffix"></i>
+  <i class="el-icon-edit el-input__icon" slot="suffix"></i>
 </jw-input>
 
 // 数字
 <jw-input
   type="number"
-	v-model="text"
-	width="800"
+  v-model="text"
+  width="800"
 >
-	<i class="el-icon-edit el-input__icon" slot="suffix"></i>
+  <i class="el-icon-edit el-input__icon" slot="suffix"></i>
 </jw-input>
 
 // 文本框
 <jw-input
   type="textarea"
-	v-model="text"
-	width="800"
+  v-model="text"
+  width="800"
 >
-	<i class="el-icon-edit el-input__icon" slot="suffix"></i>
+  <i class="el-icon-edit el-input__icon" slot="suffix"></i>
 </jw-input>
 
 // 带建议的输入框
@@ -50,8 +50,8 @@
   	<i slot="prefix" class="el-input__icon el-icon-search"></i>
   	<i class="el-icon-edit el-input__icon" slot="suffix"></i>
   <template v-slot="{ item }">
-		<div class="name">{{ item.value }}</div>
-		<span class="addr">{{ item.address }}</span>
+    <div class="name">{{ item.value }}</div>
+    <span class="addr">{{ item.address }}</span>
   </template>
 </jw-input>
 ```
@@ -68,8 +68,8 @@
 <template>
   <div id="app">
     <jw-input
-        v-model="text"
-        width="800"
+      v-model="text"
+      width="800"
     >
       <i class="el-icon-edit el-input__icon" slot="suffix"></i>
     </jw-input>
