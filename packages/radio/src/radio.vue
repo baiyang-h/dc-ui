@@ -1,6 +1,6 @@
 <template>
   <el-radio
-    class="jw-radio"
+    class="dc-radio"
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -11,9 +11,9 @@
 <script>
 /**
  * @description el-radio 的封装，单选框
- * @example <jw-radio v-model="radio" label="1">备选项</jw-radio>
+ * @example <dc-radio v-model="radio" label="1">备选项</dc-radio>
  */
 export default {
-  name: "jw-radio",
+  name: "dc-radio",
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <el-radio-button
-    class="jw-radio-button"
+    class="dc-radio-button"
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -11,9 +11,9 @@
 <script>
 /**
  * @description el-radio-button 封装，用于 el-radio-group 中，单选按钮
- * @example <jw-radio-button label="上海"></jw-radio-button>
+ * @example <dc-radio-button label="上海"></dc-radio-button>
  */
 export default {
-  name: "jw-radio-button"
+  name: "dc-radio-button"
 }
 </script>

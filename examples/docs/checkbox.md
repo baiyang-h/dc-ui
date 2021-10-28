@@ -3,7 +3,7 @@
 ```vue
 <template>
   <!-- `checked` 为 true 或 false -->
-  <jw-checkbox v-model="checked">备选项</jw-checkbox>
+  <dc-checkbox v-model="checked">备选项</dc-checkbox>
 </template>
 <script>
   export default {
@@ -22,8 +22,8 @@
 
 ```vue
 <template>
-  <jw-checkbox v-model="checked1" disabled>备选项1</jw-checkbox>
-  <jw-checkbox v-model="checked2" disabled>备选项</jw-checkbox>
+  <dc-checkbox v-model="checked1" disabled>备选项1</dc-checkbox>
+  <dc-checkbox v-model="checked2" disabled>备选项</dc-checkbox>
 </template>
 <script>
   export default {
@@ -43,13 +43,13 @@
 
 ```vue
 <template>
-  <jw-checkbox-group v-model="checkList">
-    <jw-checkbox label="复选框 A"></jw-checkbox>
-    <jw-checkbox label="复选框 B"></jw-checkbox>
-    <jw-checkbox label="复选框 C"></jw-checkbox>
-    <jw-checkbox label="禁用" disabled></jw-checkbox>
-    <jw-checkbox label="选中且禁用" disabled></jw-checkbox>
-  </jw-checkbox-group>
+  <dc-checkbox-group v-model="checkList">
+    <dc-checkbox label="复选框 A"></dc-checkbox>
+    <dc-checkbox label="复选框 B"></dc-checkbox>
+    <dc-checkbox label="复选框 C"></dc-checkbox>
+    <dc-checkbox label="禁用" disabled></dc-checkbox>
+    <dc-checkbox label="选中且禁用" disabled></dc-checkbox>
+  </dc-checkbox-group>
 </template>
 ```
 
@@ -57,11 +57,11 @@
 
 ```vue
 <template>
-  <jw-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</jw-checkbox>
+  <dc-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</dc-checkbox>
   <div style="margin: 15px 0;"></div>
-  <jw-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-    <jw-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</jw-checkbox>
-  </jw-checkbox-group>
+  <dc-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+    <dc-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</dc-checkbox>
+  </dc-checkbox-group>
 </template>
 <script>
   const cityOptions = ['上海', '北京', '广州', '深圳'];
@@ -93,12 +93,12 @@
 
 ```vue
 <template>
-  <jw-checkbox-group 
+  <dc-checkbox-group 
     v-model="checkedCities"
     :min="1"
     :max="2">
     <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
-  </jw-checkbox-group>
+  </dc-checkbox-group>
 </template>
 <script>
   const cityOptions = ['上海', '北京', '广州', '深圳'];
@@ -118,12 +118,12 @@
 
 ```vue
 <template>
-  <jw-checkbox-group v-model="checkbox">
-    <jw-checkbox-button label="上海"></jw-checkbox-button>
-    <jw-checkbox-button label="北京"></jw-checkbox-button>
-    <jw-checkbox-button label="广州"></jw-checkbox-button>
-    <jw-checkbox-button label="深圳"></jw-checkbox-button>
-  </jw-checkbox-group>
+  <dc-checkbox-group v-model="checkbox">
+    <dc-checkbox-button label="上海"></dc-checkbox-button>
+    <dc-checkbox-button label="北京"></dc-checkbox-button>
+    <dc-checkbox-button label="广州"></dc-checkbox-button>
+    <dc-checkbox-button label="深圳"></dc-checkbox-button>
+  </dc-checkbox-group>
 </template>
 
 <script>
@@ -140,7 +140,7 @@
 ## 按钮样式配置方式
 
 ```vue
-<jw-checkbox-group 
+<dc-checkbox-group 
   v-model="checkbox" 
   :options="options" 
   @change="change"
@@ -192,22 +192,22 @@ export default {
 如果配置方式想要按钮样式，需要使用 `mode="button"`
 
 ```vue
-<jw-radio-group 
+<dc-radio-group 
   v-model="checkbox" 
   :options="options" 
   mode="button"
   @change="change"
 >
-</jw-radio-group>
+</dc-radio-group>
 
 // 默认 不写 为 checkbox
-<jw-radio-group 
+<dc-radio-group 
   v-model="checkbox" 
   :options="options" 
   mode="checkbox"
   @change="change"
 >
-</jw-radio-group>
+</dc-radio-group>
 ```
 
 ## 尺寸
@@ -217,36 +217,36 @@ size: medium / small / mini
 ```vue
 <template>
   <div>
-    <jw-checkbox-group v-model="checkbox1">
-      <jw-checkbox-button label="上海"></jw-checkbox-button>
-      <jw-checkbox-button label="北京"></jw-checkbox-button>
-      <jw-checkbox-button label="广州"></jw-checkbox-button>
-      <jw-checkbox-button label="深圳"></jw-checkbox-button>
-    </jw-checkbox-group>
+    <dc-checkbox-group v-model="checkbox1">
+      <dc-checkbox-button label="上海"></dc-checkbox-button>
+      <dc-checkbox-button label="北京"></dc-checkbox-button>
+      <dc-checkbox-button label="广州"></dc-checkbox-button>
+      <dc-checkbox-button label="深圳"></dc-checkbox-button>
+    </dc-checkbox-group>
   </div>
   <div style="margin-top: 20px">
-    <jw-checkbox-group v-model="checkbox2" size="medium">
-      <jw-checkbox-button label="上海" ></jw-checkbox-button>
-      <jw-checkbox-button label="北京"></jw-checkbox-button>
-      <jw-checkbox-button label="广州"></jw-checkbox-button>
-      <jw-checkbox-button label="深圳"></jw-checkbox-button>
-    </jw-checkbox-group>
+    <dc-checkbox-group v-model="checkbox2" size="medium">
+      <dc-checkbox-button label="上海" ></dc-checkbox-button>
+      <dc-checkbox-button label="北京"></dc-checkbox-button>
+      <dc-checkbox-button label="广州"></dc-checkbox-button>
+      <dc-checkbox-button label="深圳"></dc-checkbox-button>
+    </dc-checkbox-group>
   </div>
   <div style="margin-top: 20px">
-    <jw-checkbox-group v-model="checkbox3" size="small">
-      <jw-checkbox-button label="上海"></jw-checkbox-button>
-      <jw-checkbox-button label="北京" disabled ></jw-checkbox-button>
-      <jw-checkbox-button label="广州"></jw-checkbox-button>
-      <jw-checkbox-button label="深圳"></jw-checkbox-button>
-    </jw-checkbox-group>
+    <dc-checkbox-group v-model="checkbox3" size="small">
+      <dc-checkbox-button label="上海"></dc-checkbox-button>
+      <dc-checkbox-button label="北京" disabled ></dc-checkbox-button>
+      <dc-checkbox-button label="广州"></dc-checkbox-button>
+      <dc-checkbox-button label="深圳"></dc-checkbox-button>
+    </dc-checkbox-group>
   </div>
   <div style="margin-top: 20px">
-    <jw-checkbox-group v-model="checkbox4" disabled size="mini">
-      <jw-checkbox-button label="上海"></jw-checkbox-button>
-      <jw-checkbox-button label="北京"></jw-checkbox-button>
-      <jw-checkbox-button label="广州"></jw-checkbox-button>
-      <jw-checkbox-button label="深圳"></jw-checkbox-button>
-    </jw-checkbox-group>
+    <dc-checkbox-group v-model="checkbox4" disabled size="mini">
+      <dc-checkbox-button label="上海"></dc-checkbox-button>
+      <dc-checkbox-button label="北京"></dc-checkbox-button>
+      <dc-checkbox-button label="广州"></dc-checkbox-button>
+      <dc-checkbox-button label="深圳"></dc-checkbox-button>
+    </dc-checkbox-group>
   </div>
 </template>
 
@@ -269,8 +269,8 @@ size: medium / small / mini
 ```vue
 <template>
   <div>
-    <jw-checkbox v-model="checked1" label="备选项1" border></jw-checkbox>
-    <jw-checkbox v-model="checked2" label="备选项2" border></jw-checkbox>
+    <dc-checkbox v-model="checked1" label="备选项1" border></dc-checkbox>
+    <dc-checkbox v-model="checked2" label="备选项2" border></dc-checkbox>
   </div>
 </template>
 

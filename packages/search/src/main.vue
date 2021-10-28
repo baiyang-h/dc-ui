@@ -22,7 +22,7 @@ import { isObj } from '@/utils/function/type'
 import formMapMixin from '@/mixins/form-map';
 
 export default {
-  name: 'jw-search',
+  name: 'dc-search',
   mixins: [formMapMixin],
   props: {
     //  配资

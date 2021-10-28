@@ -7,72 +7,72 @@
   display: flex;
 }
 
-.jw-flex {
+.dc-flex {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.jw-flex-wrap {
+.dc-flex-wrap {
   flex-wrap: wrap;
 }
 
-.jw-flex-nowrap {
+.dc-flex-nowrap {
   flex-wrap: nowrap;
 }
 
-.jw-col-center {
+.dc-col-center {
   align-items: center;
 }
 
-.jw-col-top {
+.dc-col-top {
   align-items: flex-start;
 }
 
-.jw-col-bottom {
+.dc-col-bottom {
   align-items: flex-end;
 }
 
-.jw-row-center {
+.dc-row-center {
   justify-content: center;
 }
 
-.jw-row-left {
+.dc-row-left {
   justify-content: flex-start;
 }
 
-.jw-row-right {
+.dc-row-right {
   justify-content: flex-end;
 }
 
-.jw-row-between {
+.dc-row-between {
   justify-content: space-between;
 }
 
-.jw-row-around {
+.dc-row-around {
   justify-content: space-around;
 }
 
-.jw-text-left {
+.dc-text-left {
   text-align: left;
 }
 
-.jw-text-center {
+.dc-text-center {
   text-align: center;
 }
 
-.jw-text-right {
+.dc-text-right {
   text-align: right;
 }
 
-.jw-flex-col {
+.dc-flex-col {
   display: flex;
   flex-direction: column;
 }
 
 // 定义flex等分
 @for $i from 0 through 12 {
-  .jw-flex-#{$i} {
+  .dc-flex-#{$i} {
     flex: $i;
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <el-checkbox-button
-    class="jw-checkbox-button"
+    class="dc-checkbox-button"
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -11,9 +11,9 @@
 <script>
 /**
  * @description 复选框按钮，在组内部使用
- * @example <jw-checkbox-button v-model="checked">备选项</jw-checkbox-button>
+ * @example <dc-checkbox-button v-model="checked">备选项</dc-checkbox-button>
  */
 export default {
-  name: "jw-checkbox-button"
+  name: "dc-checkbox-button"
 }
 </script>

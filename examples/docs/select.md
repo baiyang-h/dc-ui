@@ -22,12 +22,12 @@
 
 ```vue
 <template>
-  <jw-select
+  <dc-select
     v-model="value"
     :options="options"
     @change="change"
   >
-  </jw-select>
+  </dc-select>
 </template>
 
 <script>
@@ -57,12 +57,12 @@ export default {
 options: [{value, label}, ...]
 ```vue
 <template>
-  <jw-select
+  <dc-select
     v-model="value"
     :options="options"
     @change="change"
   >
-  </jw-select>
+  </dc-select>
 </template>
 
 <script>

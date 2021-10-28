@@ -1,6 +1,6 @@
 <template>
   <el-checkbox
-    class="jw-checkbox"
+    class="dc-checkbox"
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -11,9 +11,9 @@
 <script>
 /**
  * @description 复选框
- * @example <jw-checkbox v-model="checked">备选项</jw-checkbox>
+ * @example <dc-checkbox v-model="checked">备选项</dc-checkbox>
  */
 export default {
-  name: "jw-checkbox"
+  name: "dc-checkbox"
 }
 </script>

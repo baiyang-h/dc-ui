@@ -2,8 +2,8 @@
 
 ```vue
 <template>
-  <jw-radio v-model="radio" label="1">备选项</jw-radio>
-  <jw-radio v-model="radio" label="2">备选项</jw-radio>
+  <dc-radio v-model="radio" label="1">备选项</dc-radio>
+  <dc-radio v-model="radio" label="2">备选项</dc-radio>
 </template>
 
 <script>
@@ -23,8 +23,8 @@
 
 ```vue
 <template>
-  <jw-radio disabled v-model="radio" label="禁用">备选项</jw-radio>
-  <jw-radio disabled v-model="radio" label="选中且禁用">备选项</jw-radio>
+  <dc-radio disabled v-model="radio" label="禁用">备选项</dc-radio>
+  <dc-radio disabled v-model="radio" label="选中且禁用">备选项</dc-radio>
 </template>
 
 <script>
@@ -44,11 +44,11 @@
 
 ```vue
 <template>
-  <jw-radio-group v-model="radio">
-    <jw-radio :label="3">备选项</jw-radio>
-    <jw-radio :label="6">备选项</jw-radio>
-    <jw-radio :label="9">备选项</jw-radio>
-  </jw-radio-group>
+  <dc-radio-group v-model="radio">
+    <dc-radio :label="3">备选项</dc-radio>
+    <dc-radio :label="6">备选项</dc-radio>
+    <dc-radio :label="9">备选项</dc-radio>
+  </dc-radio-group>
 </template>
 
 <script>
@@ -68,12 +68,12 @@
 
 ```vue
 <template>
-  <jw-radio-group v-model="radio1">
-    <jw-radio-button label="上海"></jw-radio-button>
-    <jw-radio-button label="北京"></jw-radio-button>
-    <jw-radio-button label="广州"></jw-radio-button>
-    <jw-radio-button label="深圳"></jw-radio-button>
-  </jw-radio-group>
+  <dc-radio-group v-model="radio1">
+    <dc-radio-button label="上海"></dc-radio-button>
+    <dc-radio-button label="北京"></dc-radio-button>
+    <dc-radio-button label="广州"></dc-radio-button>
+    <dc-radio-button label="深圳"></dc-radio-button>
+  </dc-radio-group>
 </template>
 
 <script>
@@ -93,12 +93,12 @@
 
 ```vue
 <template>
-  <jw-radio-group
+  <dc-radio-group
     v-model="radio"
     :options="options"
     @change="change"
   >
-  </jw-radio-group>
+  </dc-radio-group>
 </template>
 
 <script>
@@ -148,22 +148,22 @@ export default {
 如果配置方式想要按钮样式，需要使用 `mode="button"`
 
 ```vue
-<jw-radio-group 
+<dc-radio-group 
   v-model="radio" 
   :options="options" 
   mode="button"
   @change="change"
 >
-</jw-radio-group>
+</dc-radio-group>
 
 // 默认 不写 为 radio
-<jw-radio-group 
+<dc-radio-group 
   v-model="radio" 
   :options="options" 
   mode="radio"
   @change="change"
 >
-</jw-radio-group>
+</dc-radio-group>
 ```
 
 
@@ -177,36 +177,36 @@ size: medium / small / mini
 ```vue
 <template>
   <div>
-    <jw-radio-group v-model="radio1">
-      <jw-radio-button label="上海"></jw-radio-button>
-      <jw-radio-button label="北京"></jw-radio-button>
-      <jw-radio-button label="广州"></jw-radio-button>
-      <jw-radio-button label="深圳"></jw-radio-button>
-    </jw-radio-group>
+    <dc-radio-group v-model="radio1">
+      <dc-radio-button label="上海"></dc-radio-button>
+      <dc-radio-button label="北京"></dc-radio-button>
+      <dc-radio-button label="广州"></dc-radio-button>
+      <dc-radio-button label="深圳"></dc-radio-button>
+    </dc-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <jw-radio-group v-model="radio2" size="medium">
-      <jw-radio-button label="上海" ></jw-radio-button>
-      <jw-radio-button label="北京"></jw-radio-button>
-      <jw-radio-button label="广州"></jw-radio-button>
-      <jw-radio-button label="深圳"></jw-radio-button>
-    </jw-radio-group>
+    <dc-radio-group v-model="radio2" size="medium">
+      <dc-radio-button label="上海" ></dc-radio-button>
+      <dc-radio-button label="北京"></dc-radio-button>
+      <dc-radio-button label="广州"></dc-radio-button>
+      <dc-radio-button label="深圳"></dc-radio-button>
+    </dc-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <jw-radio-group v-model="radio3" size="small">
-      <jw-radio-button label="上海"></jw-radio-button>
-      <jw-radio-button label="北京" disabled ></jw-radio-button>
-      <jw-radio-button label="广州"></jw-radio-button>
-      <jw-radio-button label="深圳"></jw-radio-button>
-    </jw-radio-group>
+    <dc-radio-group v-model="radio3" size="small">
+      <dc-radio-button label="上海"></dc-radio-button>
+      <dc-radio-button label="北京" disabled ></dc-radio-button>
+      <dc-radio-button label="广州"></dc-radio-button>
+      <dc-radio-button label="深圳"></dc-radio-button>
+    </dc-radio-group>
   </div>
   <div style="margin-top: 20px">
-    <jw-radio-group v-model="radio4" disabled size="mini">
-      <jw-radio-button label="上海"></jw-radio-button>
-      <jw-radio-button label="北京"></jw-radio-button>
-      <jw-radio-button label="广州"></jw-radio-button>
-      <jw-radio-button label="深圳"></jw-radio-button>
-    </jw-radio-group>
+    <dc-radio-group v-model="radio4" disabled size="mini">
+      <dc-radio-button label="上海"></dc-radio-button>
+      <dc-radio-button label="北京"></dc-radio-button>
+      <dc-radio-button label="广州"></dc-radio-button>
+      <dc-radio-button label="深圳"></dc-radio-button>
+    </dc-radio-group>
   </div>
 </template>
 

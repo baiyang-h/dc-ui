@@ -7,11 +7,11 @@
       @change="handleChange"
     ></el-cascader>
     1
-    <jw-cascader
+    <dc-cascader
       v-model="value"
       :options="options"
       @change="handleChange"
-    ></jw-cascader>
+    ></dc-cascader>
   </div>
 </template>
 

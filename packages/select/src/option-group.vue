@@ -1,6 +1,6 @@
 <template>
   <el-option-group
-    class="jw-option-group"
+    class="dc-option-group"
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -13,6 +13,6 @@
  * @description el-option-group 封装，用于 el-select 中
  */
 export default {
-  name: "jw-option-group"
+  name: "dc-option-group"
 }
 </script>

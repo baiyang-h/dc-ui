@@ -1,6 +1,6 @@
 <template>
   <el-select
-    class="jw-select"
+    class="dc-select"
     v-bind="$attrs"
     v-on="$listeners"
     :style="[wrapStyle]"
@@ -46,7 +46,7 @@
  * @example <el-select v-model="value" :options="options" @change="change">
  */
 export default {
-  name: "jw-select",
+  name: "dc-select",
   props: {
     // {value, label, 其他option属性}
     options: {
@@ -59,7 +59,7 @@ export default {
     wrapStyle() {
       const style = {};
       // 通过调用addUnit()方法，如果有单位，如百分比、px单位等，直接返回，如果是纯粹的数值，则加上px单位
-      style.width = this.$jw.addUnit(this.width)
+      style.width = this.$dc.addUnit(this.width)
       return style
     }
   }

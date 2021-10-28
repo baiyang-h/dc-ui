@@ -5,9 +5,9 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI)
 
-import JwUI from './index';
+import DcUI from './index';
 import './index.scss';
-Vue.use(JwUI);
+Vue.use(DcUI);
 
 Vue.config.productionTip = false
 

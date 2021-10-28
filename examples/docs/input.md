@@ -1,32 +1,32 @@
 ```vue
 // 文本框
-<jw-input
+<dc-input
   v-model="text"
   width="800"
 >
   <i class="el-icon-edit el-input__icon" slot="suffix"></i>
-</jw-input>
+</dc-input>
 
 // 数字
-<jw-input
+<dc-input
   type="number"
   v-model="text"
   width="800"
 >
   <i class="el-icon-edit el-input__icon" slot="suffix"></i>
-</jw-input>
+</dc-input>
 
 // 文本框
-<jw-input
+<dc-input
   type="textarea"
   v-model="text"
   width="800"
 >
   <i class="el-icon-edit el-input__icon" slot="suffix"></i>
-</jw-input>
+</dc-input>
 
 // 带建议的输入框
-<jw-input
+<dc-input
   popper-class="my-autocomplete"
   v-model="text"
   type="service"
@@ -37,7 +37,7 @@
 />
 
 // 插槽模式
-<jw-input
+<dc-input
   popper-class="my-autocomplete"
   v-model="text"
   type="service"
@@ -53,7 +53,7 @@
     <div class="name">{{ item.value }}</div>
     <span class="addr">{{ item.address }}</span>
   </template>
-</jw-input>
+</dc-input>
 ```
 
 
@@ -67,13 +67,13 @@
 ```vue
 <template>
   <div id="app">
-    <jw-input
+    <dc-input
       v-model="text"
       width="800"
     >
       <i class="el-icon-edit el-input__icon" slot="suffix"></i>
-    </jw-input>
-    <jw-input
+    </dc-input>
+    <dc-input
       popper-class="my-autocomplete"
       v-model="text"
       type="service"
@@ -89,7 +89,7 @@
         <div class="name">{{ item.value }}</div>
         <span class="addr">{{ item.address }}</span>
       </template>
-    </jw-input>
+    </dc-input>
   </div>
 </template>
 

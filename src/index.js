@@ -1,38 +1,38 @@
 // 所有组件入口
-import JwInput from '../packages/input'
-import JwInputNumber from '../packages/input-number';
-import JwRadio from '../packages/radio';
-import JwRadioButton from '../packages/radio-button';
-import JwRadioGroup from '../packages/radio-group';
-import JwCheckbox from '../packages/checkbox';
-import JwCheckboxButton from '../packages/checkbox-button';
-import JwCheckboxGroup from '../packages/checkbox-group';
-import JwSelect from '../packages/select';
-import JwOption from '../packages/option';
-import JwOptionGroup from '../packages/option-group';
-import JwCascader from '../packages/cascader';
-// import JwSearch from '../packages/search';
+import DcInput from '../packages/input'
+import DcInputNumber from '../packages/input-number';
+import DcRadio from '../packages/radio';
+import DcRadioButton from '../packages/radio-button';
+import DcRadioGroup from '../packages/radio-group';
+import DcCheckbox from '../packages/checkbox';
+import DcCheckboxButton from '../packages/checkbox-button';
+import DcCheckboxGroup from '../packages/checkbox-group';
+import DcSelect from '../packages/select';
+import DcOption from '../packages/option';
+import DcOptionGroup from '../packages/option-group';
+import DcCascader from '../packages/cascader';
+// import DcSearch from '../packages/search';
 
 import filterObject from './utils/function/filterObject'
 import addUnit from './utils/function/addUnit'
 
 const components = [
-  JwInput,
-  JwInputNumber,
-  JwRadio,
-  JwRadioButton,
-  JwRadioGroup,
-  JwCheckbox,
-  JwCheckboxButton,
-  JwCheckboxGroup,
-  JwSelect,
-  JwOption,
-  JwOptionGroup,
-  JwCascader
-  // JwSearch,
+  DcInput,
+  DcInputNumber,
+  DcRadio,
+  DcRadioButton,
+  DcRadioGroup,
+  DcCheckbox,
+  DcCheckboxButton,
+  DcCheckboxGroup,
+  DcSelect,
+  DcOption,
+  DcOptionGroup,
+  DcCascader
+  // DcSearch,
 ]
 
-const $jw = {
+const $dc = {
   // 过滤对象中的键
   filterObject,
   // 添加单位
@@ -45,7 +45,7 @@ const install = (Vue) => {
     Vue.component(component.name, component);
   })
 
-  Vue.prototype.$jw = $jw;
+  Vue.prototype.$dc = $dc;
 }
 
 

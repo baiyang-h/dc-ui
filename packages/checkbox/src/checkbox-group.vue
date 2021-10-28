@@ -1,6 +1,6 @@
 <template>
   <el-checkbox-group
-    class="jw-checkbox-group"
+    class="dc-checkbox-group"
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -26,18 +26,18 @@
  *    - [{value: 1, label: '上海', disabled: true}]
  *    - 直接一个数组 ['上海', '北京'], value和label都为数组中的值
  *    - ['上海', {value: 1, label: '上海'}, {value: 333}]
- * @property {String} mode 当jw-checkbox-group是通过options配置的方式时，有普通形式展示和按钮形式展示，默认不同单选形式，mode="checkbox"(默认)、mode="button"
+ * @property {String} mode 当dc-checkbox-group是通过options配置的方式时，有普通形式展示和按钮形式展示，默认不同单选形式，mode="checkbox"(默认)、mode="button"
  *
- * @example <jw-checkbox-group v-model="radio3" size="small" :options="options"></jw-checkbox-group>
+ * @example <dc-checkbox-group v-model="radio3" size="small" :options="options"></dc-checkbox-group>
  */
 export default {
-  name: "jw-checkbox-group",
+  name: "dc-checkbox-group",
   props: {
     // 配置项
     options: {
       type: Array
     },
-    // 配置模式时展示的形式 checkbox、button（jw-checkbox、jw-checkbox-button）
+    // 配置模式时展示的形式 checkbox、button（dc-checkbox、dc-checkbox-button）
     mode: {
       type: String,
       default: 'checkbox'
@@ -46,7 +46,7 @@ export default {
   computed: {
     // 展示形式
     getRadioTypeName() {
-      return this.mode === 'button' ? 'jw-checkbox-button' : 'jw-checkbox'
+      return this.mode === 'button' ? 'dc-checkbox-button' : 'dc-checkbox'
     },
     // 生成一定有 [{value, label}] 字段的options
     genOptions() {
@@ -62,7 +62,7 @@ export default {
   methods: {
     // 去除相关属性后
     getRadioAttrs(item) {
-      return this.$jw.filterObject(item, ['label', 'value', 'v-model'])
+      return this.$dc.filterObject(item, ['label', 'value', 'v-model'])
     }
   }
 }
