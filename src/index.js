@@ -10,6 +10,7 @@ import JwCheckboxGroup from '../packages/checkbox-group';
 import JwSelect from '../packages/select';
 import JwOption from '../packages/option';
 import JwOptionGroup from '../packages/option-group';
+import JwCascader from '../packages/cascader';
 // import JwSearch from '../packages/search';
 
 import filterObject from './utils/function/filterObject'
@@ -27,6 +28,7 @@ const components = [
   JwSelect,
   JwOption,
   JwOptionGroup,
+  JwCascader
   // JwSearch,
 ]
 
