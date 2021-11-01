@@ -1,25 +1,23 @@
 <template>
-  <el-cascader
-    class="dc-cascader"
-    ref="cascader"
+  <el-time-select
+    class="dc-time-picker"
+    ref="timePicker"
     v-bind="$attrs"
     v-on="$listeners"
     :style="[wrapStyle]"
   >
-    <template v-slot="slotProps">
-      <slot v-bind="slotProps"></slot>
-    </template>
-  </el-cascader>
+    <slot></slot>
+  </el-time-select>
 </template>
 
 <script>
 /**
- * @description 级联
+ * @description TimePicker 时间选择器
  * @property {String | Number} width 输入框长度，可以是 100、100px、100%、auto
- * @example <el-cascader v-model="value" :options="options" @change="handleChange"></el-cascader>
+ * @example <dc-time-picker v-model="value"></dc-time-picker>
  */
 export default {
-  name: "dc-cascader",
+  name: "dc-time-picker",
   props: {
     width: [String, Number],
   },
@@ -30,6 +28,6 @@ export default {
       if(this.width) style.width = this.$dc.addUnit(this.width)
       return style
     }
-  },
+  }
 }
 </script>

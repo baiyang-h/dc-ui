@@ -1,6 +1,7 @@
 <template>
   <el-select
     class="dc-select"
+    ref="select"
     v-bind="$attrs"
     v-on="$listeners"
     :style="[wrapStyle]"

@@ -2,6 +2,7 @@
   <service-input
     v-if="type === 'service'"
     class="dc-input"
+    ref="input"
     :style="[wrapStyle]"
     :value="value"
     :options="options"
@@ -11,14 +12,14 @@
     <template v-for="key in Object.keys($slots)" :slot="key">
       <slot :name="key"></slot>
     </template>
-    <template v-slot="{ item }">
-      <slot :item="item"></slot>
+    <template v-slot="slotProps">
+      <slot v-bind="slotProps"></slot>
     </template>
   </service-input>
   <el-input
     v-else
     ref="input"
-    class="dc-input"
+    class="dc-input-service"
     :style="[wrapStyle]"
     v-bind="$attrs"
     v-on="filterListeners"
@@ -29,6 +30,9 @@
   >
     <template v-for="key in Object.keys($slots)" :slot="key">
       <slot :name="key"></slot>
+    </template>
+    <template v-slot="slotProps">
+      <slot v-bind="slotProps"></slot>
     </template>
   </el-input>
 </template>

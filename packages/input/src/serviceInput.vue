@@ -1,18 +1,18 @@
 <template>
   <div class="service-input">
     <el-autocomplete
-        ref="autocomplete"
-        :value="value"
-        v-bind="$attrs"
-        v-on="filterListeners"
-        :fetch-suggestions="querySearch"
-        @select="select"
+      ref="autocomplete"
+      :value="value"
+      v-bind="$attrs"
+      v-on="filterListeners"
+      :fetch-suggestions="querySearch"
+      @select="select"
     >
       <template v-for="key in Object.keys($slots)" :slot="key">
         <slot :name="key"></slot>
       </template>
-      <template v-slot="{ item }">
-        <slot :item="item"></slot>
+      <template v-slot="slotProps">
+        <slot v-bind="slotProps"></slot>
       </template>
     </el-autocomplete>
   </div>
