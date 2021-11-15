@@ -3,7 +3,9 @@
     v-bind="$attrs"
     v-on="$listeners"
   >
-    <slot></slot>
+    <template v-for="key in Object.keys($slots)" :slot="key">
+      <slot :name="key"></slot>
+    </template>
   </el-upload>
 </template>
 

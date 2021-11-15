@@ -23,7 +23,7 @@
     :style="[wrapStyle]"
     v-bind="$attrs"
     v-on="filterListeners"
-    :type="type"
+    :type="wrapType"
     :value="value"
     @input="input"
     @change="change"
@@ -93,6 +93,10 @@ export default {
       // 通过调用addUnit()方法，如果有单位，如百分比、px单位等，直接返回，如果是纯粹的数值，则加上px单位
       if(this.width) style.width = this.$dc.addUnit(this.width)
       return style
+    },
+    wrapType() {
+      // 考虑到原生 type=number 的影响，所以不使用原生
+      return this.type === 'number' ? 'text' : this.type
     }
   },
   methods: {

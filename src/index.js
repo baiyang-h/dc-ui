@@ -20,6 +20,8 @@ import Upload from '../packages/upload';
 import Rate from '../packages/rate';
 import ColorPicker from '../packages/color-picker';
 import Transfer from '../packages/transfer';
+import Form from '../packages/form'
+import FormItem from '../packages/form-item'
 // import Search from '../packages/search';
 
 import filterObject from './utils/function/filterObject'
@@ -47,6 +49,8 @@ const components = [
   Rate,
   ColorPicker,
   Transfer,
+  Form,
+  FormItem,
   // Search,
 ]
 
