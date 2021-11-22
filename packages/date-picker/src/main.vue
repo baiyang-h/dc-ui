@@ -4,6 +4,7 @@
     ref="datePicker"
     v-bind="$attrs"
     v-on="$listeners"
+    :type="type"
     :style="[wrapStyle]"
   >
     <slot></slot>
@@ -14,6 +15,7 @@
 /**
  * @description DatePicker 日期时间选择器
  * @property {String | Number} width 输入框长度，可以是 100、100px、100%、auto
+ * @property {String} type 类型，默认date
  * @property {String} type 时间控件类型 year/month/date/dates/ week/datetime/datetimerange/ daterange/monthrange
  * @example <dc-date-picker v-model="value"></dc-date-picker>
  */
@@ -21,6 +23,10 @@ export default {
   name: "dc-date-picker",
   props: {
     width: [String, Number],
+    type: {
+      type: String,
+      default: 'date'
+    }
   },
   computed: {
     wrapStyle() {
