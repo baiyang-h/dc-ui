@@ -8,6 +8,7 @@
   >
     <template v-if="config.length">
       <el-form-item
+        :ref="item.key+'Ref'"
         v-for="item in config"
         v-bind="$dc.filterObject(item, ['attrs', 'listeners'])"
         :key="item.key"
@@ -17,7 +18,7 @@
         <components
           :is="control[item.type]"
           v-bind="item.attrs"
-          v-on="item.listeners"
+          v-on="wrapFormItemListeners(item.listeners)"
           v-model="form[item.key]"
         >
           <slot></slot>
@@ -39,9 +40,19 @@
  * @description From
  * @property { Array } config 配置项
  * @property { Boolean } showBtn 是否显示底部按钮，默认显示。如果footer插槽和showBtn属性同时出现，优先级showBtn更高
+ * @property { String } okText 底部确认按钮文字，默认提交
+ * @property { String } cancelText 底部取消按钮文字，默认重置
  * @event { Function } submit showBtn为true按钮显示的时，确认按钮触发的事件，向外暴露值 this.form
  * @event { Function } reset showBtn为true按钮显示的时，取消按钮触发的事件，向外暴露值 this.form
+ * @ref { Function } validate 对整个表单进行校验的方法，外部使用 this.$ref['form'].validate(callback)
+ * @ref { Function } validateField 对部分表单字段进行校验的方法，外部使用 this.$ref['form'].validate(string|array) 或参数传入数组
+ * @ref { Function } resetFields 对整个表单进行重置，this.$ref['form'].resetFields() ，可传入字符串键名、数组、或不传，只重置一个、多个、所有
+ * @ref { Function } clearValidate 移除表单项的校验结果，this.$ref['form'].clearValidate(array | string) 或不传
+ * @ref { Function } getFieldsValue 获取一组输入控件的值，如不传入参数，则获取全部组件的值，this.$ref['form'].getFieldsValue(array | string) 或不传， 可取一个、多个、所有
+ * @ref { Function } getFieldValue 获得单个控件的值，this.$ref['form'].getFieldValue(string)
+ * @ref { Function } setFieldsValue 设置一组输入控件的值，传入的是一个对象，this.$ref['form'].setFieldsValue({a: 1, b: 2})
  */
+import { isObj } from '@/utils/function/type'
 import control from "../control";
 export default {
   name: "dc-form",
@@ -53,7 +64,7 @@ export default {
     // 底部按钮显示与否
     showBtn: {
       type: Boolean,
-      default: true
+      default: false
     },
     // 底部确认按钮文字
     okText: {
@@ -82,7 +93,16 @@ export default {
       })
       return form
     },
-
+    // 对 from-item 组件的事件进行处理，使其this指向该form实例
+    wrapFormItemListeners(listeners) {
+      if(listeners) {
+        return Object.keys(listeners).reduce((total, key) => {
+          total[key] = listeners[key].bind(this)
+          return total
+        }, {})
+      }
+      return listeners
+    },
     // showBtn显示的时候，点击提交触发的事件
     submit() {
       this.$refs['form'].validate((valid) => {
@@ -98,7 +118,6 @@ export default {
       this.$refs['form'].resetFields();
       this.$emit('reset', this.form)
     },
-
     // 对整个表单进行校验的方法
     validate(callback) {
       return this.$refs['form'].validate(callback)
@@ -108,15 +127,27 @@ export default {
       return this.$refs['form'].validateField(...args)
     },
     // 对整个表单进行重置
-    resetFields(...args) {
-      return this.$refs['form'].resetFields(...args)
+    resetFields(keys) {
+      // 如果有传入的话则对传入的 key 重置，如果没有传入参数，则重置所有表单
+      if(keys) {
+        if(typeof keys === 'string') {
+          this.$refs[keys+'Ref'].forEach(ref => ref.resetField())
+        } else if(Array.isArray(keys) && keys.length) {
+          keys.forEach(key => {
+            this.$refs[key+'Ref'].forEach(ref => ref.resetField())
+          })
+        }
+      } else {
+        this.$refs['form'].resetFields()
+      }
     },
     // 移除表单项的校验结果
     clearValidate(...args) {
       return this.$refs['form'].clearValidate(...args)
     },
     // 获取一组输入控件的值，如不传入参数，则获取全部组件的值
-    getFieldsValue(fieldNames) { // fieldNames: string[] | string
+    getFieldsValue(fieldNames) {
+      // fieldNames: string[] | string
       // 如果不传参数，则返回整个 form
       if(!fieldNames) {
         return this.form
@@ -131,6 +162,20 @@ export default {
         return o
       } else if(typeof fieldNames === 'string') {
         return this.form[fieldNames]
+      }
+    },
+    // 获得单个控件的值
+    getFieldValue(fieldName) {
+      if(typeof fieldName === 'string') {
+        return this.form[fieldName]
+      }
+    },
+    // 设置一组输入控件的值，传入的是一个对象
+    setFieldsValue(values) {
+      if(values && isObj(values)) {
+        Object.keys(values).forEach(key => {
+          this.form[key] = values[key]
+        })
       }
     }
   }

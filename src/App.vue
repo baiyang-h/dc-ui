@@ -1,15 +1,20 @@
 <template>
-  <dc-form
-    ref="ruleForm"
-    :config="config"
-    :rules="rules"
-    :show-btn="true"
-  >
-<!--    <el-form-item slot="footer">-->
-<!--      <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>-->
-<!--      <el-button @click="resetForm('ruleForm')">重置</el-button>-->
-<!--    </el-form-item>-->
-  </dc-form>
+  <div>
+    <dc-form
+      ref="ruleForm"
+      :config="config"
+      :rules="rules"
+      :inline="true"
+    >
+      <el-form-item slot="footer">
+        <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+        <el-button @click="resetForm('ruleForm')">重置</el-button>
+      </el-form-item>
+    </dc-form>
+    <button @click="getFieldsValue">getFieldsValue</button>
+    <button @click="setFieldsValue">setFieldsValue</button>
+    <button @click="clearValidate">clearValidate</button>
+  </div>
 </template>
 <script>
 export default {
@@ -37,8 +42,8 @@ export default {
             blur(e) {
               console.log(this, e.target)
             },
-            clear() {
-              console.log('clear')
+            clear: () => {
+              console.log('clear', this)
             }
           }
         },
@@ -46,6 +51,9 @@ export default {
           type: 'input',
           label: '文本数字框',
           key: 'number',
+          rules: [
+            { required: true, message: '年龄不能为空'},
+          ],
           attrs: {
             type: 'number',
           }
@@ -357,14 +365,35 @@ export default {
         }
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-    },
-    aaaaa() {
-      this.$refs['aaaa'].resetField()
-    },
     submit(values) {
       console.log(values)
+    },
+    resetForm(formName) {
+      // this.$refs[formName].resetFields('text');
+      // this.$refs[formName].resetFields(['text', 'number']);
+      this.$refs[formName].resetFields();
+    },
+    // 得到所有的form值，或部分
+    getFieldsValue() {
+      console.log(this.$refs['ruleForm'].getFieldsValue())
+      console.log(this.$refs['ruleForm'].getFieldsValue('text'))
+      console.log(this.$refs['ruleForm'].getFieldValue('text'))
+      console.log(this.$refs['ruleForm'].getFieldsValue(['text', 'number']))
+    },
+    // 设置表单值
+    setFieldsValue() {
+      this.$refs['ruleForm'].setFieldsValue({
+        text: '111',
+        number: '222',
+        inputNumber: 333,
+        select: 'Shanghai',
+        checkboxGroup: ['Shanghai', 'Beijing']
+      })
+    },
+    // 移除所有表单校验结果、或部分校验结果
+    clearValidate() {
+      this.$refs['ruleForm'].clearValidate()
+      // this.$refs['ruleForm'].clearValidate(['text', 'number'])
     }
   }
 }
