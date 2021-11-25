@@ -1,32 +1,19 @@
 <template>
   <div>
-    <el-button-group>
-      <el-button type="primary" @click="getFieldsValue">getFieldsValue</el-button>
-      <el-button type="primary" @click="setFieldsValue">setFieldsValue</el-button>
-      <el-button type="primary" @click="setForm">直接修改form</el-button>
-      <el-button type="primary" @click="clearValidate">clearValidate</el-button>
-    </el-button-group>
-    <dc-gap height="30"></dc-gap>
-    <dc-form
-        ref="ruleForm"
+    <dc-search
+        ref="search"
         v-model="form"
         :config="config"
-        :rules="rules"
+        :inline="true"
         :showBtn="true"
-        label-width="80px"
     >
-      <template slot="slot1">
-        <el-form-item prop="aaa">
-          <el-input v-model="form.aaa"></el-input>
-        </el-form-item>
-        <el-form-item prop="bbb" :rules="{required: true, message: '输入插槽值123123123'}">
-          <el-input v-model="form.bbb"></el-input>
-        </el-form-item>
-      </template>
-      <template slot="ccc">
-        <el-input v-model="form.ccc"></el-input>
-      </template>
-    </dc-form>
+      <el-form-item label="自定义插槽1" prop="text1" slot="text1" :rules="{required: true, message: '必填', trigger: 'blur'}">
+        <el-input v-model="form.text1"></el-input>
+      </el-form-item>
+      <el-form-item label="自定义插槽2" prop="text2" slot="text2">
+        <el-input v-model="form.text2"></el-input>
+      </el-form-item>
+    </dc-search>
   </div>
 </template>
 <script>
@@ -34,9 +21,8 @@ export default {
   data() {
     return {
       form: {
-        text: '我是文本',
-        aaa: 'aaa',
-        bbb: ''
+        text: 'aaa',
+        text1: 'bbb'
       },
       config: [
         {
@@ -67,23 +53,18 @@ export default {
         },
         {
           type: 'slot',
-          label: '插槽1',
-          key: 'slot1',
+          key: 'text1',
         },
         {
           type: 'slot',
-          label: '插槽2',
-          key: 'ccc',
-          rules: [
-            { required: true, message: '必填'},
-          ],
+          key: 'text2',
         },
         {
           type: 'input',
           label: '文本数字框',
           key: 'number',
           rules: [
-            { required: true, message: '必填'},
+            { required: true, message: '年龄不能为空'},
           ],
           attrs: {
             type: 'number',
@@ -376,79 +357,10 @@ export default {
           }
         }
       ],
-      rules: {
-        text: [
-          { required: true, message: '请输入活动名称' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符' }
-        ],
-        text2: [
-          { required: true, message: '必填', trigger: 'blur' },
-        ],
-        aaa: [
-          { required: true, message: '必填' },
-        ],
-      }
     };
   },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        console.log(valid)
-        if (valid) {
-          console.log(213123)
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
-    },
-    submit(values) {
-      console.log(values)
-    },
-    resetForm(formName) {
-      // this.$refs[formName].resetFields('text');
-      // this.$refs[formName].resetFields(['text', 'number']);
-      this.$refs[formName].resetFields();
-    },
-    // 得到所有的form值，或部分
-    getFieldsValue() {
-      console.log(this.$refs['ruleForm'].getFieldsValue())
-      // console.log(this.$refs['ruleForm'].getFieldsValue('text'))
-      // console.log(this.$refs['ruleForm'].getFieldValue('text'))
-      // console.log(this.$refs['ruleForm'].getFieldsValue(['text', 'number']))
-    },
-    // 设置表单值
-    setFieldsValue() {
-      this.$refs['ruleForm'].setFieldsValue({
-        text: '111',
-        text1: 'ccc',
-        number: '222',
-        inputNumber: 333,
-        select: 'Shanghai',
-        checkboxGroup: ['Shanghai', 'Beijing'],
-        aaa: '我是插槽aaa',
-        bbb: '我是插槽bbb',
-        ccc: '我是插槽ccc',
-      })
-    },
-    setForm() {
-      this.form = {
-        ...this.form,
-        text: '文本123',
-        number: '4567777',
-        inputNumber: 554,
-        select: 'Shanghai',
-        checkboxGroup: ['Shanghai', 'Beijing'],
-        aaa: '我是插槽1',
-        bbb: '我是插槽2',
-        ccc: '我是插槽3',
-      }
-    },
-    // 移除所有表单校验结果、或部分校验结果
-    clearValidate() {
-      this.$refs['ruleForm'].clearValidate()
-      // this.$refs['ruleForm'].clearValidate(['text', 'number'])
-    },
+
   }
 }
 </script>

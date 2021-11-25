@@ -22,7 +22,8 @@ import ColorPicker from '../packages/color-picker';
 import Transfer from '../packages/transfer';
 import Form from '../packages/form'
 import FormItem from '../packages/form-item'
-// import Search from '../packages/search';
+import Gap from '../packages/gap'
+import Search from '../packages/search';
 
 import filterObject from './utils/function/filterObject'
 import addUnit from './utils/function/addUnit'
@@ -51,7 +52,8 @@ const components = [
   Transfer,
   Form,
   FormItem,
-  // Search,
+  Gap,
+  Search,
 ]
 
 const $dc = {

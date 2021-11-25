@@ -12,14 +12,14 @@
         v-model="form"
         :config="config"
         :rules="rules"
+        :inline="true"
         :showBtn="true"
-        label-width="80px"
     >
       <template slot="slot1">
         <el-form-item prop="aaa">
           <el-input v-model="form.aaa"></el-input>
         </el-form-item>
-        <el-form-item prop="bbb" :rules="{required: true, message: '输入插槽值123123123'}">
+        <el-form-item prop="bbb" :rules="{required: true, message: '输入插槽值'}">
           <el-input v-model="form.bbb"></el-input>
         </el-form-item>
       </template>
@@ -36,7 +36,7 @@ export default {
       form: {
         text: '我是文本',
         aaa: 'aaa',
-        bbb: ''
+        bbb: '',
       },
       config: [
         {

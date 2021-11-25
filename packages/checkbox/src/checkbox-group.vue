@@ -3,6 +3,7 @@
     class="dc-checkbox-group"
     v-bind="$attrs"
     v-on="$listeners"
+    :value="value"
   >
     <div v-if="options">
       <components
@@ -33,6 +34,10 @@
 export default {
   name: "dc-checkbox-group",
   props: {
+    value: {
+      type: Array,
+      default: () => ([])
+    },
     // 配置项
     options: {
       type: Array

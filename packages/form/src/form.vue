@@ -7,23 +7,24 @@
     :model="form"
   >
     <template v-if="config.length">
-      <el-form-item
-        :ref="item.key+'Ref'"
-        v-for="item in config"
-        v-bind="$dc.filterObject(item, ['attrs', 'listeners'])"
-        :key="item.key"
-        :label="item.label || ''"
-        :prop="item.key"
-      >
-        <components
-          :is="control[item.type]"
-          v-bind="item.attrs"
-          v-on="wrapFormItemListeners(item.listeners)"
-          v-model="form[item.key]"
+      <template v-for="item in config">
+        <el-form-item
+          v-bind="$dc.filterObject(item, ['attrs', 'listeners'])"
+          :ref="item.key+'Ref'"
+          :key="item.key"
+          :label="item.label || ''"
+          :prop="item.key"
         >
-          <slot></slot>
-        </components>
-      </el-form-item>
+          <components
+            v-if="item.type !== 'slot'"
+            :is="control[item.type]"
+            v-bind="item.attrs"
+            v-on="wrapFormItemListeners(item.listeners)"
+            v-model="form[item.key]"
+          />
+          <slot v-else :name="item.key"></slot>
+        </el-form-item>
+      </template>
     </template>
     <slot v-else></slot>
     <!--  底部按钮部分，如果footer插槽和showBtn属性同时出现，优先级showBtn更高  -->
@@ -38,8 +39,9 @@
 <script>
 /**
  * @description From
- * @property { Array } config 配置项
- * @property { Boolean } showBtn 是否显示底部按钮，默认显示。如果footer插槽和showBtn属性同时出现，优先级showBtn更高
+ * @property { Object } value 外部设置的默认form值，可直接通过外部this.form.xx = xx 改变
+ * @property { Array } config 配置项, 默认配置中的每个对象key就代表el-form-item中的属性prop，当存在插槽的时候我们需要手动传入prop
+ * @property { Boolean } showBtn 是否显示底部按钮，默认false不显示。如果footer插槽和showBtn属性同时出现，优先级showBtn更高
  * @property { String } okText 底部确认按钮文字，默认提交
  * @property { String } cancelText 底部取消按钮文字，默认重置
  * @event { Function } submit showBtn为true按钮显示的时，确认按钮触发的事件，向外暴露值 this.form
@@ -57,9 +59,14 @@ import control from "../control";
 export default {
   name: "dc-form",
   props: {
+    // 为了外部直接修改value内部也能改变
+    value: {
+      type: Object,
+      default: () => ({})
+    },
     config: {
       type: Array,
-      default: () => []
+      default: () => ([])
     },
     // 底部按钮显示与否
     showBtn: {
@@ -79,17 +86,39 @@ export default {
   },
   data() {
     return {
-      form: this.initForm(),
-      control
+      control,
+      form: this.initForm()
+    }
+  },
+  watch: {
+    form: {
+      handler(val) {
+        this.$emit('input', val)
+        this.$emit('change', val)
+      },
+      deep: true,
+    },
+    // 为了监听直接在外面改变 value，内部也同步更新
+    value: {
+      handler(val) {
+        this.form = val
+      },
+      deep: true,
     }
   },
   methods: {
-    // 初始化form数据，对于相关类型初始化为数组，其他为undefined
+    // 初始化form数据，如果外部设置了form其他值的则保持不变，如无设置的都为undefined
     initForm() {
       const form = {}
-      const arrayControl = ['checkboxGroup'];
+      Object.keys(this.value).forEach(key => {
+        form[key] = this.value[key]
+      })
       this.config.forEach(item => {
-        form[item.key] = arrayControl.includes(item.key) ? [] : undefined
+        // eslint-disable-next-line no-prototype-builtins
+        if(!form.hasOwnProperty(item.key)) {
+          // this.$set(form, item.key, undefined)
+          form[item.key] = undefined
+        }
       })
       return form
     },
@@ -174,7 +203,7 @@ export default {
     setFieldsValue(values) {
       if(values && isObj(values)) {
         Object.keys(values).forEach(key => {
-          this.form[key] = values[key]
+          this.$set(this.form, key, values[key])
         })
       }
     }

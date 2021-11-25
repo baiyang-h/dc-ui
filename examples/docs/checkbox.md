@@ -137,14 +137,16 @@
 </script>
 ```
 
-## 按钮样式配置方式
+## 配置方式
 
 ```vue
-<dc-checkbox-group 
+<template>
+	<dc-checkbox-group 
   v-model="checkbox" 
   :options="options" 
   @change="change"
 />
+</template>
 <script>
 export default {
   data() {
@@ -192,22 +194,22 @@ export default {
 如果配置方式想要按钮样式，需要使用 `mode="button"`
 
 ```vue
-<dc-radio-group 
+<dc-checkbox-group 
   v-model="checkbox" 
   :options="options" 
   mode="button"
   @change="change"
 >
-</dc-radio-group>
+</dc-checkbox-group>
 
 // 默认 不写 为 checkbox
-<dc-radio-group 
+<dc-checkbox-group 
   v-model="checkbox" 
   :options="options" 
   mode="checkbox"
   @change="change"
 >
-</dc-radio-group>
+</dc-checkbox-group>
 ```
 
 ## 尺寸
