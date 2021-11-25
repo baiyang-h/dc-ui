@@ -22,7 +22,7 @@
             v-on="wrapFormItemListeners(item.listeners)"
             v-model="form[item.key]"
           />
-          <slot v-else :name="item.key"></slot>
+          <slot v-else :name="item.name"></slot>
         </el-form-item>
       </template>
     </template>
@@ -40,12 +40,15 @@
 /**
  * @description From
  * @property { Object } value 外部设置的默认form值，可直接通过外部this.form.xx = xx 改变
- * @property { Array } config 配置项, 默认配置中的每个对象key就代表el-form-item中的属性prop，当存在插槽的时候我们需要手动传入prop
+ * @property { Array } config 配置项
  * @property { Boolean } showBtn 是否显示底部按钮，默认false不显示。如果footer插槽和showBtn属性同时出现，优先级showBtn更高
  * @property { String } okText 底部确认按钮文字，默认提交
  * @property { String } cancelText 底部取消按钮文字，默认重置
+ *
+ * @event { Function } change 当表单中任何一个控件的值发生改变时就会触发，提供form值的参数
  * @event { Function } submit showBtn为true按钮显示的时，确认按钮触发的事件，向外暴露值 this.form
  * @event { Function } reset showBtn为true按钮显示的时，取消按钮触发的事件，向外暴露值 this.form
+ *
  * @ref { Function } validate 对整个表单进行校验的方法，外部使用 this.$ref['form'].validate(callback)
  * @ref { Function } validateField 对部分表单字段进行校验的方法，外部使用 this.$ref['form'].validate(string|array) 或参数传入数组
  * @ref { Function } resetFields 对整个表单进行重置，this.$ref['form'].resetFields() ，可传入字符串键名、数组、或不传，只重置一个、多个、所有
@@ -114,10 +117,12 @@ export default {
         form[key] = this.value[key]
       })
       this.config.forEach(item => {
-        // eslint-disable-next-line no-prototype-builtins
-        if(!form.hasOwnProperty(item.key)) {
-          // this.$set(form, item.key, undefined)
-          form[item.key] = undefined
+        // 如果没有key键，则跳过，主要是 slot 的问题，插槽设置prop的问题
+        if(item.key) {
+          // eslint-disable-next-line no-prototype-builtins
+          if(!form.hasOwnProperty(item.key)) {
+            form[item.key] = undefined
+          }
         }
       })
       return form
@@ -134,13 +139,7 @@ export default {
     },
     // showBtn显示的时候，点击提交触发的事件
     submit() {
-      this.$refs['form'].validate((valid) => {
-        if (valid) {
-          this.$emit('submit', this.form)
-        } else {
-          return false;
-        }
-      });
+      this.$emit('submit', this.form)
     },
     // 点击取消按钮触发的事件
     reset() {

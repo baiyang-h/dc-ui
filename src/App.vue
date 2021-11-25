@@ -8,23 +8,37 @@
     </el-button-group>
     <dc-gap height="30"></dc-gap>
     <dc-form
-        ref="ruleForm"
-        v-model="form"
-        :config="config"
-        :rules="rules"
-        :showBtn="true"
-        label-width="80px"
+      ref="form"
+      v-model="form"
+      :config="config"
+      :rules="rules"
+      :showBtn="true"
+      label-width="100px"
+      @submit="submit"
     >
       <template slot="slot1">
-        <el-form-item prop="aaa">
-          <el-input v-model="form.aaa"></el-input>
-        </el-form-item>
-        <el-form-item prop="bbb" :rules="{required: true, message: '输入插槽值123123123'}">
-          <el-input v-model="form.bbb"></el-input>
-        </el-form-item>
+        <div style="display: flex">
+          <el-form-item prop="aaa">
+            <el-input v-model="form.aaa"></el-input>
+          </el-form-item>
+          -
+          <el-form-item prop="bbb" :rules="{required: true, message: '输入插槽值123123123'}">
+            <el-input v-model="form.bbb"></el-input>
+          </el-form-item>
+        </div>
       </template>
-      <template slot="ccc">
+      <template slot="slot2">
         <el-input v-model="form.ccc"></el-input>
+      </template>
+      <template slot="slot3">
+        <div style="display: flex">
+          <el-form-item>
+            <el-input v-model="form.ddd"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-input v-model="form.eee"></el-input>
+          </el-form-item>
+        </div>
       </template>
     </dc-form>
   </div>
@@ -36,7 +50,8 @@ export default {
       form: {
         text: '我是文本',
         aaa: 'aaa',
-        bbb: ''
+        bbb: '',
+        slot3: ''
       },
       config: [
         {
@@ -68,14 +83,26 @@ export default {
         {
           type: 'slot',
           label: '插槽1',
-          key: 'slot1',
+          name: 'slot1',
+          required: true
         },
         {
           type: 'slot',
           label: '插槽2',
           key: 'ccc',
+          name: 'slot2',
           rules: [
             { required: true, message: '必填'},
+          ],
+        },
+        {
+          type: 'slot',
+          label: '插槽3',
+          key: 'slot3',
+          name: 'slot3',
+          required: true,
+          rules: [
+            { required: true, message: '这里的键是slot3，所以slot3必须是有值才可通过，必填项'},
           ],
         },
         {
@@ -402,8 +429,19 @@ export default {
         }
       });
     },
-    submit(values) {
-      console.log(values)
+    submit() {
+      if(this.form.ddd && this.form.eee) {
+        this.form.slot3 = 1
+      } else {
+        this.form.slot3 = undefined
+      }
+      this.$refs['form'].validate((valid) => {
+        if (valid) {
+          this.$emit('submit', this.form)
+        } else {
+          return false;
+        }
+      });
     },
     resetForm(formName) {
       // this.$refs[formName].resetFields('text');
@@ -412,14 +450,14 @@ export default {
     },
     // 得到所有的form值，或部分
     getFieldsValue() {
-      console.log(this.$refs['ruleForm'].getFieldsValue())
-      // console.log(this.$refs['ruleForm'].getFieldsValue('text'))
-      // console.log(this.$refs['ruleForm'].getFieldValue('text'))
-      // console.log(this.$refs['ruleForm'].getFieldsValue(['text', 'number']))
+      console.log(this.$refs['form'].getFieldsValue())
+      // console.log(this.$refs['form'].getFieldsValue('text'))
+      // console.log(this.$refs['form'].getFieldValue('text'))
+      // console.log(this.$refs['form'].getFieldsValue(['text', 'number']))
     },
     // 设置表单值
     setFieldsValue() {
-      this.$refs['ruleForm'].setFieldsValue({
+      this.$refs['form'].setFieldsValue({
         text: '111',
         text1: 'ccc',
         number: '222',
@@ -446,8 +484,8 @@ export default {
     },
     // 移除所有表单校验结果、或部分校验结果
     clearValidate() {
-      this.$refs['ruleForm'].clearValidate()
-      // this.$refs['ruleForm'].clearValidate(['text', 'number'])
+      this.$refs['form'].clearValidate()
+      // this.$refs['form'].clearValidate(['text', 'number'])
     },
   }
 }
