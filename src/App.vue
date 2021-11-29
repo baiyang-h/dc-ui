@@ -44,6 +44,7 @@
   </div>
 </template>
 <script>
+import Custom from '../examples/demo/Custom'
 export default {
   data() {
     return {
@@ -51,7 +52,7 @@ export default {
         text: '我是文本',
         aaa: 'aaa',
         bbb: '',
-        slot3: ''
+        slot3: '',
       },
       config: [
         {
@@ -401,7 +402,13 @@ export default {
               }]
             }]
           }
-        }
+        },
+        {
+          type: 'custom',
+          label: '自定义',
+          key: 'custom',
+          component: Custom
+        },
       ],
       rules: {
         text: [

@@ -17,7 +17,7 @@
         >
           <components
             v-if="item.type !== 'slot'"
-            :is="control[item.type]"
+            :is="item.type !== 'custom' ? control[item.type] : item.component"
             v-bind="item.attrs"
             v-on="wrapFormItemListeners(item.listeners)"
             v-model="form[item.key]"
