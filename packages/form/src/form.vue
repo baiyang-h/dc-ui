@@ -39,8 +39,8 @@
 <script>
 /**
  * @description From
- * @property { Object } value 外部设置的默认form值，可直接通过外部this.form.xx = xx 改变
  * @property { Array } config 配置项
+ * @property { Object } initialValues 表单默认值，只有初始化以及重置时生效
  * @property { Boolean } showBtn 是否显示底部按钮，默认false不显示。如果footer插槽和showBtn属性同时出现，优先级showBtn更高
  * @property { String } okText 底部确认按钮文字，默认提交
  * @property { String } cancelText 底部取消按钮文字，默认重置
@@ -62,14 +62,14 @@ import control from "../control";
 export default {
   name: "dc-form",
   props: {
-    // 为了外部直接修改value内部也能改变
-    value: {
-      type: Object,
-      default: () => ({})
-    },
     config: {
       type: Array,
       default: () => ([])
+    },
+    // 表单默认值，只有初始化以及重置时生效
+    initialValues: {
+      type: Object,
+      default: () => ({})
     },
     // 底部按钮显示与否
     showBtn: {
@@ -96,35 +96,37 @@ export default {
   watch: {
     form: {
       handler(val) {
-        this.$emit('input', val)
         this.$emit('change', val)
       },
       deep: true,
     },
-    // 为了监听直接在外面改变 value，内部也同步更新
-    value: {
-      handler(val) {
-        this.form = val
-      },
-      deep: true,
-    }
   },
   methods: {
-    // 初始化form数据，如果外部设置了form其他值的则保持不变，如无设置的都为undefined
+    // 初始化form数据，这里还没做递归的情况
     initForm() {
       const form = {}
-      Object.keys(this.value).forEach(key => {
-        form[key] = this.value[key]
-      })
       this.config.forEach(item => {
         // 如果没有key键，则跳过，主要是 slot 的问题，插槽设置prop的问题
         if(item.key) {
-          // eslint-disable-next-line no-prototype-builtins
-          if(!form.hasOwnProperty(item.key)) {
-            form[item.key] = undefined
-          }
+          form[item.key] = item.defaultValue || undefined
         }
       })
+      // 如果在form上设置了initialValues属性，则优先级比单一的defaultValue高
+      if(Object.keys(this.initialValues).length) {
+        // eslint-disable-next-line no-prototype-builtins
+        if(this.config.some(item => item.hasOwnProperty('defaultValue'))) {
+          console.warn('注意：存在initialValues的情景下，不要使用defaultValue')
+        }
+        //以initialValues设置的值为准，没设置的为undefined
+        Object.keys(form).forEach(key => {
+          // eslint-disable-next-line no-prototype-builtins
+          if(this.initialValues.hasOwnProperty(key)) {
+            form[key] = this.initialValues[key]
+          } else {
+            form[key] = undefined
+          }
+        })
+      }
       return form
     },
     // 通过传入的config表单类型，加载动态组件。普通表单和自定义表单
@@ -152,7 +154,9 @@ export default {
     },
     // 对整个表单进行校验的方法
     validate(callback) {
-      return this.$refs['form'].validate(callback)
+      return this.$refs['form'].validate((valid)=>{
+        callback(valid, this.form)
+      })
     },
     // 对部分表单字段进行校验的方法
     validateField(...args) {
