@@ -17,7 +17,7 @@
         >
           <components
             v-if="item.type !== 'slot'"
-            :is="item.type !== 'custom' ? control[item.type] : item.component"
+            :is="getComNameOrModule(item)"
             v-bind="item.attrs"
             v-on="wrapFormItemListeners(item.listeners)"
             v-model="form[item.key]"
@@ -126,6 +126,10 @@ export default {
         }
       })
       return form
+    },
+    // 通过传入的config表单类型，加载动态组件。普通表单和自定义表单
+    getComNameOrModule(item) {
+      return item.type !== 'custom' ? control[item.type] : item.component
     },
     // 对 from-item 组件的事件进行处理，使其this指向该form实例
     wrapFormItemListeners(listeners) {
