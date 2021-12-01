@@ -82,6 +82,11 @@ export default {
           }
         },
         {
+          type: 'input',
+          label: '文本框2',
+          key: 'text2',
+        },
+        {
           type: 'slot',
           label: '插槽1',
           name: 'slot1',

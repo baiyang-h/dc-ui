@@ -93,10 +93,13 @@ export default {
       form: this.initForm()
     }
   },
+  created() {
+    // 初始化
+    this.$emit('input', this.form)
+  },
   watch: {
     form: {
       handler(val) {
-        this.$emit('input', val)
         this.$emit('change', val)
       },
       deep: true,
@@ -110,18 +113,18 @@ export default {
     }
   },
   methods: {
-    // 初始化form数据，如果外部设置了form其他值的则保持不变，如无设置的都为undefined
+    // 初始化form数据，如果外部设置了form其他值的则保持不变，没设置则undefined
     initForm() {
       const form = {}
       Object.keys(this.value).forEach(key => {
-        form[key] = this.value[key]
+        this.$set(form, key, this.value[key])
       })
       this.config.forEach(item => {
         // 如果没有key键，则跳过，主要是 slot 的问题，插槽设置prop的问题
         if(item.key) {
           // eslint-disable-next-line no-prototype-builtins
           if(!form.hasOwnProperty(item.key)) {
-            form[item.key] = undefined
+            this.$set(form, item.key, undefined)
           }
         }
       })
