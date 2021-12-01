@@ -20,6 +20,7 @@ rules 表单的规则
   type: '表单控件类型', // input、inputNumber、select、radio、checkbox、checkboxGroup、switch、time、date、cascader
   label: '表单label',
   key: '表单域model字段, 也表示el-form-item上的prop属性',
+  defaultValue: 'xx',	// 初始化默认值， 如果dc-form上有initialValues，优先级高于defaultValue
   attrs: {
    	// 该对象中写的都是表单控件的属性，如el-input上的属性
   },
