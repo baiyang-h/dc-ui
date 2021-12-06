@@ -9,34 +9,33 @@
     <dc-gap height="30"></dc-gap>
     <dc-form
       ref="form"
-      v-model="form"
       :config="config"
+      :option="option"
       :rules="rules"
-      :showBtn="true"
-      label-width="100px"
+      v-model="form"
       @submit="submit"
     >
       <template slot="slot1">
         <div style="display: flex">
-          <el-form-item prop="aaa">
-            <el-input v-model="form.aaa"></el-input>
+          <el-form-item prop="slot1_a">
+            <el-input v-model="form.slot1_a"></el-input>
           </el-form-item>
           -
-          <el-form-item prop="bbb" :rules="{required: true, message: '输入插槽值123123123'}">
-            <el-input v-model="form.bbb"></el-input>
+          <el-form-item prop="slot1_b" :rules="{required: true, message: '输入插槽值123123123'}">
+            <el-input v-model="form.slot1_b"></el-input>
           </el-form-item>
         </div>
       </template>
       <template slot="slot2">
-        <el-input v-model="form.ccc"></el-input>
+        <el-input v-model="form.slot2"></el-input>
       </template>
       <template slot="slot3">
         <div style="display: flex">
-          <el-form-item>
-            <el-input v-model="form.ddd"></el-input>
+          <el-form-item prop="slot3_a">
+            <el-input v-model="form.slot3_a"></el-input>
           </el-form-item>
-          <el-form-item>
-            <el-input v-model="form.eee"></el-input>
+          <el-form-item prop="slot3_b">
+            <el-input v-model="form.slot3_b"></el-input>
           </el-form-item>
         </div>
       </template>
@@ -49,16 +48,33 @@ export default {
   data() {
     return {
       form: {
-        text: '我是文本',
-        aaa: 'aaa',
-        bbb: '',
+        text: '这是一个纯文本',
+        input: '我是文本',
+        slot1_a: 'slot1_a',
+        slot1_b: '',
+        slot2: '',
         slot3: '',
+        slot3_a: '',
+        slot3_b: '',
+        custom1: {
+          custom_input: '',
+          custom_select: '1111111',
+        }
       },
-      config: [
+      config: {
+        showBtn: true,
+        labelWidth: '120px'
+      },
+      option: [
+        {
+          type: 'text',
+          label: '文本',
+          key: 'text',
+        },
         {
           type: 'input',
           label: '文本框',
-          key: 'text',
+          key: 'input',
           attrs: {
             // reg: /^\d*$/g,
             maxlength: 10,
@@ -84,7 +100,7 @@ export default {
         {
           type: 'input',
           label: '文本框2',
-          key: 'text2',
+          key: 'input2',
         },
         {
           type: 'slot',
@@ -95,7 +111,7 @@ export default {
         {
           type: 'slot',
           label: '插槽2',
-          key: 'ccc',
+          key: 'slot2',
           name: 'slot2',
           rules: [
             { required: true, message: '必填'},
@@ -410,20 +426,51 @@ export default {
         },
         {
           type: 'custom',
-          label: '自定义',
           key: 'custom',
           component: Custom
         },
+        {
+          type: 'custom',
+          label: 'custom_children',
+          key: 'custom1',
+          children: [
+            {
+              type: 'input',
+              key: 'custom_input',
+            },
+            {
+              type: 'custom',
+              key: 'custom_text',
+              component: {
+                // render(createElement) {
+                //   return createElement('div', '--分隔符--')
+                // }
+                template: `<div>分隔符</div>`
+              }
+            },
+            {
+              type: 'select',
+              key: 'custom_select',
+              attrs: {
+                options: [
+                  {
+                    value: '1111111',
+                    label: 'aaa'
+                  }, {
+                    value: '2222222',
+                    label: 'bbb'
+                  }
+                ]
+              }
+            },
+          ]
+        },
       ],
       rules: {
-        text: [
-          { required: true, message: '请输入活动名称' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符' }
-        ],
-        text2: [
+        input2: [
           { required: true, message: '必填', trigger: 'blur' },
         ],
-        aaa: [
+        slot1_a: [
           { required: true, message: '必填' },
         ],
       }
@@ -442,11 +489,6 @@ export default {
       });
     },
     submit() {
-      if(this.form.ddd && this.form.eee) {
-        this.form.slot3 = 1
-      } else {
-        this.form.slot3 = undefined
-      }
       this.$refs['form'].validate((valid) => {
         if (valid) {
           this.$emit('submit', this.form)
@@ -471,14 +513,14 @@ export default {
     setFieldsValue() {
       this.$refs['form'].setFieldsValue({
         text: '111',
-        text1: 'ccc',
+        text1: 'text1',
         number: '222',
         inputNumber: 333,
         select: 'Shanghai',
         checkboxGroup: ['Shanghai', 'Beijing'],
-        aaa: '我是插槽aaa',
-        bbb: '我是插槽bbb',
-        ccc: '我是插槽ccc',
+        slot1_a: '我是插槽slot1_a',
+        slot1_b: '我是插槽slot1_b',
+        slot2: '我是插槽slot2',
       })
     },
     setForm() {
@@ -489,9 +531,9 @@ export default {
         inputNumber: 554,
         select: 'Shanghai',
         checkboxGroup: ['Shanghai', 'Beijing'],
-        aaa: '我是插槽1',
-        bbb: '我是插槽2',
-        ccc: '我是插槽3',
+        slot1_a: '我是插槽slot1_a',
+        slot1_b: '我是插槽slot1_b',
+        slot2: '我是插槽slot2',
       }
     },
     // 移除所有表单校验结果、或部分校验结果

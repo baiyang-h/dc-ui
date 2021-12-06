@@ -27,6 +27,7 @@ import Search from '../packages/search';
 
 import filterObject from './utils/function/filterObject'
 import addUnit from './utils/function/addUnit'
+import deepMerge from './utils/function/deepMerge'
 
 const components = [
   Input,
@@ -60,7 +61,9 @@ const $dc = {
   // 过滤对象中的键
   filterObject,
   // 添加单位
-  addUnit
+  addUnit,
+  // 对象数组深度合并
+  deepMerge
 }
 
 const install = (Vue) => {
