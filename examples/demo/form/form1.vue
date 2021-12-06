@@ -1,99 +1,22 @@
 <template>
-  <div>
-    <el-button-group>
-      <el-button type="primary" @click="getFieldsValue">getFieldsValue</el-button>
-      <el-button type="primary" @click="setFieldsValue">setFieldsValue</el-button>
-      <el-button type="primary" @click="clearValidate">clearValidate</el-button>
-    </el-button-group>
-    <dc-gap height="30"></dc-gap>
-    <dc-form
-        ref="form"
-        :config="config"
-        :option="option"
-        :rules="rules"
-        v-model="form"
-        @submit="submit"
-    >
-      <template slot="slot1">
-        <div style="display: flex">
-          <el-form-item prop="slot1_a">
-            <el-input v-model="form.slot1_a"></el-input>
-          </el-form-item>
-          -
-          <el-form-item prop="slot1_b" :rules="{required: true, message: '必填'}">
-            <el-input v-model="form.slot1_b"></el-input>
-          </el-form-item>
-        </div>
-      </template>
-      <template slot="slot2">
-        <el-input v-model="form.slot2"></el-input>
-      </template>
-      <template slot="slot3">
-        <div style="display: flex">
-          <el-form-item prop="slot3_a">
-            <el-input v-model="form.slot3_a"></el-input>
-          </el-form-item>
-          <el-form-item prop="slot3_b">
-            <el-input v-model="form.slot3_b"></el-input>
-          </el-form-item>
-        </div>
-      </template>
-    </dc-form>
-  </div>
+  <dc-form
+    ref="form"
+    :config="config"
+    :option="option"
+    @submit="submit"
+  >
+  </dc-form>
 </template>
 <script>
-import Custom from '../examples/demo/Custom'
+// form的基本使用
 export default {
   data() {
     return {
-      // form: {
-      //   text: '有初始值',
-      //   input: '初始值input',
-      //   input2: '初始值input2',
-      //   slot1_a: '初始值slot1_a',
-      //   slot1_b: '初始值slot1_b',
-      //   slot2: '有初始值slot2',
-      //   slot3: '有初始值slot3',
-      //   slot3_a: '有初始值slot3_a',
-      //   slot3_b: '有初始值slot3_b',
-      //   number: '有初始值222',
-      //   inputNumber: 333,
-      //   select: 'Shanghai',
-      //   radio: 'Shanghai',
-      //   checkbox: true,
-      //   checkboxGroup: ['Shanghai', 'Beijing'],
-      //   switch: true,
-      //   time:"09:00",
-      //   cascader: ["zujian", "basic", "layout"],
-      //   custom1: {
-      //     custom_input: '有初始值custom_input',
-      //     custom_select: '1111111',
-      //   }
-      // },
-      form: {
-        text: '这是一个纯文本',
-        input: '我是文本',
-        slot1_a: 'slot1_a',
-        slot1_b: '',
-        slot2: '',
-        slot3: '',
-        slot3_a: '',
-        slot3_b: '',
-        custom1: {
-          custom_input: '',
-          custom_select: '1111111',
-        }
-      },
       config: {
         showBtn: true,
         labelWidth: '120px'
       },
       option: [
-        {
-          type: 'text',
-          label: '文本',
-          key: 'text',
-        },
         {
           type: 'input',
           label: '文本框',
@@ -109,7 +32,6 @@ export default {
             // disabled: true,
             // size: 'mini',
             // autofocus: true,
-            label: 'aaaa',
           },
           listeners: {
             blur(e) {
@@ -126,37 +48,9 @@ export default {
           key: 'input2',
         },
         {
-          type: 'slot',
-          label: '插槽1',
-          name: 'slot1',
-          required: true
-        },
-        {
-          type: 'slot',
-          label: '插槽2',
-          key: 'slot2',
-          name: 'slot2',
-          rules: [
-            { required: true, message: '必填'},
-          ],
-        },
-        {
-          type: 'slot',
-          label: '插槽3',
-          key: 'slot3',
-          name: 'slot3',
-          required: true,
-          rules: [
-            { required: true, message: '这里的键是slot3，所以slot3必须是有值才可通过，必填项'},
-          ],
-        },
-        {
           type: 'input',
           label: '文本数字框',
           key: 'number',
-          rules: [
-            { required: true, message: '必填'},
-          ],
           attrs: {
             type: 'number',
           }
@@ -447,94 +341,12 @@ export default {
             }]
           }
         },
-        {
-          type: 'custom',
-          key: 'custom',
-          component: Custom
-        },
-        {
-          type: 'custom',
-          label: 'custom_children',
-          key: 'custom1',
-          children: [
-            {
-              type: 'input',
-              key: 'custom_input',
-            },
-            {
-              type: 'custom',
-              key: 'custom_text',
-              component: {
-                // render(createElement) {
-                //   return createElement('div', '--分隔符--')
-                // }
-                template: `<div>分隔符</div>`
-              }
-            },
-            {
-              type: 'select',
-              key: 'custom_select',
-              attrs: {
-                options: [
-                  {
-                    value: '1111111',
-                    label: 'aaa'
-                  }, {
-                    value: '2222222',
-                    label: 'bbb'
-                  }
-                ]
-              }
-            },
-          ]
-        },
-      ],
-      rules: {
-        input2: [
-          { required: true, message: '必填', trigger: 'blur' },
-        ],
-        slot1_a: [
-          { required: true, message: '必填' },
-        ],
-      }
+      ]
     };
   },
-  watch: {
-    'form.slot3_a'(val) {
-      if(val && this.form.slot3_b) {
-        this.form.slot3 = 1
-      } else {
-        this.form.slot3 = ''
-      }
-    },
-    'form.slot3_b'(val) {
-      if(val && this.form.slot3_a) {
-        this.form.slot3 = 1
-      } else {
-        this.form.slot3 = ''
-      }
-    }
-  },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        console.log(valid)
-        if (valid) {
-          console.log(213123)
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
-    },
     submit() {
-      this.$refs['form'].validate((valid) => {
-        if (valid) {
-          console.log(this.form)
-        } else {
-          return false;
-        }
-      });
+      console.log(this.$refs['form'].getFieldsValue())
     },
     resetForm(formName) {
       // this.$refs[formName].resetFields('text');
@@ -571,11 +383,6 @@ export default {
           custom_input: 'dddd'
         }
       })
-    },
-    // 移除所有表单校验结果、或部分校验结果
-    clearValidate() {
-      this.$refs['form'].clearValidate()
-      // this.$refs['form'].clearValidate(['text', 'number'])
     },
   }
 }

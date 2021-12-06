@@ -140,6 +140,7 @@ export default {
   watch: {
     form: {
       handler(val) {
+        this.$emit('input', val)
         this.$emit('change', val)
       },
       deep: true,
@@ -155,7 +156,11 @@ export default {
             if(item.children && item.children.length) {
               o[item.key] = recursionOption(item.children)
             } else {
-              o[item.key] = undefined
+              if(['checkbox', 'switch'].includes(item.type)) {
+                o[item.key] = false
+              } else {
+                o[item.key] = undefined
+              }
             }
           }
         })
