@@ -29,9 +29,10 @@
             <components
               v-if="_item.type !== 'slot'"
               :is="getComNameOrModule(_item)"
-              v-bind="_item.attrs"
-              v-on="wrapFormItemListeners(_item.listeners)"
               v-model="form[item.key][_item.key]"
+              v-bind="_item.attrs"
+              :placeholder="wrapPlaceholder(item)"
+              v-on="wrapFormItemListeners(_item.listeners)"
             />
             <slot v-else :name="_item.name"></slot>
           </el-form-item>
@@ -47,9 +48,10 @@
           <components
             v-if="item.type !== 'slot'"
             :is="getComNameOrModule(item)"
-            v-bind="item.attrs"
-            v-on="wrapFormItemListeners(item.listeners)"
             v-model="form[item.key]"
+            v-bind="item.attrs"
+            :placeholder="wrapPlaceholder(item)"
+            v-on="wrapFormItemListeners(item.listeners)"
           />
           <slot v-else :name="item.name"></slot>
         </el-form-item>
@@ -168,6 +170,10 @@ export default {
       }
       const form = recursionOption(this.option)
       return this.$dc.deepMerge(form, this.value)
+    },
+    wrapPlaceholder(item) {
+      if(item.attrs && item.attrs.placeholder) return item.attrs.placeholder
+      return item.label ? item.label : '请输入'
     },
     //form-item继承的属性，移除一部分不需要继承的属性
     inheritFormItemAttrs(item) {

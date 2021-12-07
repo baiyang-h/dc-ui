@@ -1,28 +1,19 @@
 <template>
-  <div>
-    <div class="btns">
-      <el-checkbox v-model="checked" style="margin-right: 20px">是否显示按钮</el-checkbox>
-      <el-button type="primary" @click="getFieldsValue">获取表单数据</el-button>
-      <el-button type="primary" @click="setFieldsValue">设置表单</el-button>
-      <el-button type="primary" @click="resetForm">重置表单</el-button>
-    </div>
-    <dc-form
-      ref="form"
-      :config="config"
-      :option="option"
-      @submit="submit"
-    >
-    </dc-form>
-  </div>
+  <dc-form
+    ref="form"
+    :config="config"
+    :option="option"
+    @submit="submit"
+  >
+  </dc-form>
 </template>
 <script>
-// form的基本使用
+// 有校验的表单
 export default {
   data() {
     return {
-      checked: false,
       config: {
-        showBtn: false,
+        showBtn: true,
         labelWidth: '120px'
       },
       option: [
@@ -30,31 +21,6 @@ export default {
           type: 'input',
           label: '文本框',
           key: 'input',
-          attrs: {
-            // reg: /^\d*$/g,
-            maxlength: 10,
-            minlength: 1,
-            'show-word-limit': true,
-            placeholder: '请输入内容input',
-            clearable: true,
-            // 'show-password': true,
-            // disabled: true,
-            // size: 'mini',
-            // autofocus: true,
-          },
-          listeners: {
-            blur(e) {
-              console.log(this, e.target)
-            },
-            clear: () => {
-              console.log('clear', this)
-            }
-          }
-        },
-        {
-          type: 'input',
-          label: '文本框2',
-          key: 'input2',
         },
         {
           type: 'input',
@@ -353,58 +319,16 @@ export default {
       ]
     };
   },
-  watch: {
-    checked(val) {
-      this.config.showBtn = val
-    }
-  },
   methods: {
     submit() {
-      console.log(this.$refs['form'].getFieldsValue())
-      this.$message.success(JSON.stringify(
-        this.$refs['form'].getFieldsValue(),
-        function (key, value) {
-          if(value === undefined) {
-            return 'undefined'
-          } else if(value === 'symbol' || typeof value === 'function') {
-            return value.toString()
-          } else {
-            return value
-          }
-        },
-        4
-      ))
+
     },
     resetForm() {
-      // 重置key为input的表单
-      // this.$refs['form'].resetFields('input');
-
-      // 重置key为 input、number 的表单
-      // this.$refs['form'].resetFields(['input', 'number']);
-
-      // 重置所有的表单
       this.$refs['form'].resetFields();
     },
     getFieldsValue() {
-      this.$message.success(JSON.stringify(
-        this.$refs['form'].getFieldsValue(),
-        function (key, value) {
-          if(value === undefined) {
-            return 'undefined'
-          } else if(value === 'symbol' || typeof value === 'function') {
-            return value.toString()
-          } else {
-            return value
-          }
-        },
-        4
-      ))
       // 获取所有表单数据
       console.log('所有', this.$refs['form'].getFieldsValue())
-      // 获取input表单数据
-      console.log('input', this.$refs['form'].getFieldsValue('input'))
-      // 获取 input、number 表单数据
-      console.log("input、number", this.$refs['form'].getFieldsValue(['input', 'number']))
     },
     // 设置表单值
     setFieldsValue() {
@@ -425,11 +349,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-.btns {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-</style>

@@ -6,6 +6,9 @@
     v-on="$listeners"
     :type="type"
     :style="[wrapStyle]"
+    :placeholder="placeholder"
+    :start-placeholder="startPlaceholder"
+    :end-placeholder="endPlaceholder"
   >
     <slot></slot>
   </el-date-picker>
@@ -26,6 +29,18 @@ export default {
     type: {
       type: String,
       default: 'date'
+    },
+    placeholder: {
+      type: String,
+      default: '选择日期时间'
+    },
+    startPlaceholder: {
+      type: String,
+      default: '开始日期'
+    },
+    endPlaceholder: {
+      type: String,
+      default: '结束日期'
     }
   },
   computed: {
@@ -35,7 +50,7 @@ export default {
       if(this.width) style.width = this.$dc.addUnit(this.width)
       return style
     }
-  }
+  },
 }
 </script>
 
