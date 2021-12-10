@@ -69,11 +69,14 @@ const Custom3 = {
   },
   methods: {
     blur() {
-      if(this.a && this.b) this.$emit('input', {
-        a: this.a,
-        b: this.b
-      })
-      if(this.a === '' && this.b === '') this.$emit('input', undefined)
+      if(!this.a && !this.b) {
+        this.$emit('input', undefined)
+      } else {
+        this.$emit('input', {
+          a: this.a,
+          b: this.b
+        })
+      }
     },
   },
   watch: {
@@ -111,7 +114,7 @@ export default {
         custom1: '',
         custom2: {
           custom_input: '',
-          custom_select: 1
+          custom_select: ''
         },
         custom3: undefined
       },
@@ -419,6 +422,8 @@ export default {
           type: 'custom',
           key: 'custom2',
           label: '自定义组件2',
+          requiredMark: true,
+          class: 'aaa',
           children: [
             {
               type: 'input',
@@ -480,6 +485,9 @@ export default {
           }
         ],
         custom1: [
+          { required: true, message: '必填',  trigger: 'blur' },
+        ],
+        'custom2.custom_input': [
           { required: true, message: '必填' },
         ],
         custom3: [

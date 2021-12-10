@@ -12,6 +12,7 @@
         <el-form-item
           v-if="item.type==='custom' && item.children && item.children.length>0"
           v-bind="inheritFormItemAttrs(item)"
+          :class="wrapFormItemClass(item)"
           :ref="item.key+'Ref'"
           :key="item.key"
           :label="item.label || ''"
@@ -21,6 +22,7 @@
             class="form-item-inline-block"
             v-for="_item in item.children"
             v-bind="inheritFormItemAttrs(item)"
+            :class="wrapFormItemClass(item)"
             :ref="_item.key+'Ref'"
             :key="_item.key"
             :label="_item.label || ''"
@@ -40,6 +42,7 @@
         <el-form-item
           v-else
           v-bind="inheritFormItemAttrs(item)"
+          :class="wrapFormItemClass(item)"
           :ref="item.key+'Ref'"
           :key="item.key"
           :label="item.label || ''"
@@ -171,13 +174,25 @@ export default {
       const form = recursionOption(this.option)
       return this.$dc.deepMerge(form, this.value)
     },
+    // placeholder 初始化
     wrapPlaceholder(item) {
       if(item.attrs && item.attrs.placeholder) return item.attrs.placeholder
       return item.label ? item.label : '请输入'
     },
+    // el-form-item class类初始化
+    wrapFormItemClass(item) {
+      let gather = ''
+      if(item.class) {
+        gather += item.class
+      }
+      if(item.requiredMark) {
+        gather = gather + ' ' + 'required-mark'
+      }
+      return gather
+    },
     //form-item继承的属性，移除一部分不需要继承的属性
     inheritFormItemAttrs(item) {
-      return this.$dc.filterObject(item, ['attrs', 'listeners', 'children'])
+      return this.$dc.filterObject(item, ['attrs', 'listeners', 'children', 'component'])
     },
     // 通过传入的option表单类型，加载动态组件。普通表单和自定义表单
     getComNameOrModule(item) {
@@ -269,8 +284,15 @@ export default {
   }
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss">
 .form-item-inline-block {
   display: inline-block;
+}
+.required-mark {
+  .el-form-item__label::before {
+    content: '*';
+    color: #F56C6C;
+    margin-right: 4px;
+  }
 }
 </style>
