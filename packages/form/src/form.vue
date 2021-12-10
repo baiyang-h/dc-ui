@@ -154,7 +154,7 @@ export default {
       const recursionOption = (options) => {
         let o = {}
         options.forEach(item => {
-          if(item.key) {
+          if(item.key && item.key !== 'html') {
             if(item.children && item.children.length) {
               o[item.key] = recursionOption(item.children)
             } else {
@@ -183,6 +183,10 @@ export default {
     getComNameOrModule(item) {
       if(item.type === 'custom') {
         return item.component
+      } else if(item.type === 'html') {
+        return {
+          template: item.template
+        }
       } else {
         return control[item.type]
       }

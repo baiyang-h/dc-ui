@@ -1,5 +1,9 @@
 ## 基本使用
 
+type类型：text、input、inputNumber、select、radio、checkbox、checkboxGroup、switch、time、date、cascader、custom、html
+其中custom自定义组件使用 component，
+html 使用template
+
 默认表单不会显示底部按钮，如果想显示的话，则设置showBtn为true
 
 showBtn 底部按钮显示与否
