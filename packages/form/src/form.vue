@@ -21,8 +21,8 @@
           <el-form-item
             class="form-item-inline-block"
             v-for="_item in item.children"
-            v-bind="inheritFormItemAttrs(item)"
-            :class="wrapFormItemClass(item)"
+            v-bind="inheritFormItemAttrs(_item)"
+            :class="wrapFormItemClass(_item)"
             :ref="_item.key+'Ref'"
             :key="_item.key"
             :label="_item.label || ''"
@@ -33,7 +33,7 @@
               :is="getComNameOrModule(_item)"
               v-model="form[item.key][_item.key]"
               v-bind="_item.attrs"
-              :placeholder="wrapPlaceholder(item)"
+              :placeholder="wrapPlaceholder(_item)"
               v-on="wrapFormItemListeners(_item.listeners)"
             />
             <slot v-else :name="_item.name"></slot>
@@ -80,7 +80,7 @@
  *    @config { String } config.cancelText 底部取消按钮文字，默认重置
  *
  * @property { Object } value 外部设置的默认form值，可直接通过外部this.form.xx = xx 改变
- * @property { Array } option 表单item配置项list
+ * @property { Array } option 表单item配置项list [{type, key, label, ...}, ...] 其中 type和key 是必填项
  * @property { Array } rules 表单验证规则
  *
  * @event { Function } change 当表单中任何一个控件的值发生改变时就会触发，提供form值的参数
@@ -216,6 +216,36 @@ export default {
       }
       return listeners
     },
+    merge(target = {}, source = {}, arrayMerge=false) {
+      if (typeof target !== 'object' || typeof source !== 'object') return false;
+      for (var prop in source) {
+        // eslint-disable-next-line no-prototype-builtins
+        if (!source.hasOwnProperty(prop)) continue;
+        if (prop in target) {
+          if (typeof target[prop] !== 'object') {
+            this.$set(target, prop, source[prop])
+          } else {
+            if (typeof source[prop] !== 'object') {
+              this.$set(target, prop, source[prop])
+            } else {
+              if (target[prop].concat && source[prop].concat) { // 都是数组
+                // 考虑到我不想合并数组，直接直接赋值，默认直接赋值
+                if(arrayMerge) {
+                  this.$set(target, prop, target[prop].concat(source[prop]))
+                } else {
+                  this.$set(target, prop, source[prop])
+                }
+              } else { // 都是对象
+                this.$set(target, prop, this.merge(target[prop], source[prop]))
+              }
+            }
+          }
+        } else {
+          this.$set(target, prop, source[prop])
+        }
+      }
+      return target;
+    },
     // config.showBtn显示的时候，点击提交触发的事件
     submit() {
       this.$emit('submit', this.form)
@@ -227,7 +257,7 @@ export default {
     },
     // 对整个表单进行校验的方法
     validate(callback) {
-      return this.$refs['form'].validate(callback)
+      return this.$refs['form'].validate((valid) => callback(valid, this.form))
     },
     // 对部分表单字段进行校验的方法
     validateField(...args) {
@@ -279,7 +309,8 @@ export default {
     },
     // 设置一组输入控件的值，传入的是一个对象
     setFieldsValue(values) {
-      this.form = this.$dc.deepMerge(this.form, values)
+      // 因为element-ui 的resetFields重置到上一次this.form，一开始使用深拷贝，重新赋值，就会变成setFieldsValue后的值，所以不对this.form重新赋新值了
+      this.merge(this.form, values)
     }
   }
 }

@@ -11,6 +11,7 @@
       :config="config"
       :option="option"
       @submit="submit"
+      @reset="reset"
     >
     </dc-form>
   </div>
@@ -374,6 +375,9 @@ export default {
         },
         4
       ))
+    },
+    reset(values) {
+      console.log(values)
     },
     resetForm() {
       // 重置key为input的表单

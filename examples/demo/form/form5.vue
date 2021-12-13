@@ -7,6 +7,7 @@
       :option="option"
       :rules="rules"
       @submit="submit"
+      @reset="reset"
     >
       <template slot="slot1">
         <div style="display: flex">
@@ -24,20 +25,24 @@
       </template>
       <template slot="slot3">
         <div style="display: flex">
-          <el-form-item>
+          <el-form-item prop="slot3.a">
             <el-input v-model="form.slot3.a" placeholder="请输入"></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="slot3.b">
             <el-input v-model="form.slot3.b" placeholder="请输入"></el-input>
           </el-form-item>
         </div>
       </template>
     </dc-form>
+    <el-button type="primary" @click="getFieldsValue">getFieldsValue</el-button>
+    <el-button type="primary" @click="setFieldsValue">setFieldsValue</el-button>
+    <el-button type="primary" @click="resetFields">resetFields</el-button>
   </div>
 </template>
 
 <script>
 // 混合，包括了 slot和custom并且带有校验的表单
+// 如果想要使 this.$refs['form'].resetFields() 有效，对于插槽外部一定要加上 prop， 内部是因为都做了处理，插槽只能外部自己加上，或者自己手动清空重置
 
 const Custom = {
   props: ['value'],
@@ -507,10 +512,47 @@ export default {
         }
       });
     },
+    reset(values) {
+      console.log(values)
+    },
+    getFieldsValue() {
+      console.log(this.$refs['form'].getFieldsValue())
+    },
+    setFieldsValue() {
+      this.$refs['form'].setFieldsValue({
+        text: 'abc',
+        input: 'aaa',
+        number: '222',
+        inputNumber: 333,
+        select: 'Shanghai',
+        radio: 'Shanghai',
+        checkbox: true,
+        checkboxGroup: ['Shanghai', 'Beijing'],
+        switch: true,
+        time: '09:30',
+        date: undefined,
+        cascader: ['zhinan', 'shejiyuanze', 'yizhi'],
+        slot1_a: '111',
+        slot1_b: '222',
+        slot2: '333333333333333333333333333333333333333333333333333333333333333333',
+        slot3: {
+          a: '444',
+          b: '555'
+        },
+        custom1: 'custom1',
+        custom2: {
+          custom_input: 'custom_input',
+          custom_select: 2
+        },
+        custom3: {
+          a: 777,
+          b: 888
+        }
+      })
+    },
+    resetFields() {
+      this.$refs['form'].resetFields()
+    }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
