@@ -9,7 +9,7 @@ const routes = [
   },
   {
     path: '/form',
-    component: () => import('../../examples/demo/form/form5')
+    component: () => import('@/demo/form/form5.vue')
   }
 ]
 

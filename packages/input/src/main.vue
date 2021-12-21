@@ -38,9 +38,10 @@
 </template>
 
 <script>
-import { isRegExp } from '@/utils/function/type'
 import serviceInput from './serviceInput'
-
+const isRegExp = (o) => {
+  return Object.prototype.toString.call(o).slice(8, -1) === 'RegExp'
+}
 /**
  * @description input 输入框
  *
