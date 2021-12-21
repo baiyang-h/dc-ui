@@ -3,6 +3,7 @@
     class="dc-radio-group"
     v-bind="$attrs"
     v-on="$listeners"
+    :value="value"
   >
     <div v-if="options">
       <components
@@ -33,6 +34,9 @@
 export default {
   name: "dc-radio-group",
   props: {
+    value: {
+      default: undefined
+    },
     // 配置项
     options: {
       type: Array
@@ -46,7 +50,7 @@ export default {
   computed: {
     // 展示形式
     getRadioTypeName() {
-      return this.mode === 'button' ? 'dc-radio-button' : 'dc-radio'
+      return this.mode === 'button' ? 'el-radio-button' : 'el-radio'
     },
     // 生成一定有 [{value, label}] 字段的options
     genOptions() {

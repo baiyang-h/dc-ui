@@ -51,7 +51,7 @@ export default {
   computed: {
     // 展示形式
     getRadioTypeName() {
-      return this.mode === 'button' ? 'dc-checkbox-button' : 'dc-checkbox'
+      return this.mode === 'button' ? 'el-checkbox-button' : 'el-checkbox'
     },
     // 生成一定有 [{value, label}] 字段的options
     genOptions() {

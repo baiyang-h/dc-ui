@@ -103,7 +103,7 @@ export default {
         inputNumber: undefined,
         select: '',
         radio: undefined,
-        checkbox: undefined,
+        checkbox: false,
         checkboxGroup: undefined,
         switch: true,
         time: undefined,

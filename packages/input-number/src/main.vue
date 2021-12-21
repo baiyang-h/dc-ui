@@ -5,6 +5,7 @@
     ref="inputNumber"
     v-bind="$attrs"
     v-on="$listeners"
+    :value="value"
   >
   </el-input-number>
 </template>
@@ -19,6 +20,9 @@
 export default {
   name: "dc-input-number",
   props: {
+    value: {
+      default: undefined
+    },
     // 表单内容文本位置
     align: {
       type: String,

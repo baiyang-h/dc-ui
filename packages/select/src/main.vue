@@ -5,6 +5,7 @@
     v-bind="$attrs"
     v-on="$listeners"
     :style="[wrapStyle]"
+    :value="value"
   >
     <div v-if="options">
       <template
@@ -49,6 +50,9 @@
 export default {
   name: "dc-select",
   props: {
+    value: {
+      default: undefined
+    },
     // {value, label, 其他option属性}
     options: {
       type: Array,

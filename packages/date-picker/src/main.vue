@@ -9,6 +9,7 @@
     :placeholder="placeholder"
     :start-placeholder="startPlaceholder"
     :end-placeholder="endPlaceholder"
+    :value="value"
   >
     <slot></slot>
   </el-date-picker>
@@ -25,6 +26,9 @@
 export default {
   name: "dc-date-picker",
   props: {
+    value: {
+      default: undefined
+    },
     width: [String, Number],
     type: {
       type: String,
