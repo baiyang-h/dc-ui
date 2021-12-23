@@ -1,8 +1,7 @@
 <template>
   <div>
-    aaaaa
-    <el-button @click="show">click</el-button>
-    <router-view></router-view>
+    <button @click="show">bbbb</button>
+    bbbb
   </div>
 </template>
 
@@ -12,7 +11,7 @@ export default {
   methods: {
     show() {
       this.$router.push({
-        name: 'bb',
+        name: 'cc'
       })
     }
   }

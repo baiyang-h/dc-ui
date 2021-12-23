@@ -1,29 +1,23 @@
 <template>
   <div>
-    13123
-    <bbbbbbbbd></bbbbbbbbd>
+    Home
+    <el-button @click="show">click</el-button>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-// import acccc from './a.vue'
-const aa = {
-  template: `<div>123213213</div>`
-}
 export default {
   name: "home",
-  components: {
-    bbbbbbbbd: aa,
-    // acccc
-  },
-  data() {
-    return {
-      bb: 'aa'
+  methods: {
+    show() {
+      this.$router.push({
+        name: 'aa',
+        query: {
+          id: 'asdasdasdsad'
+        }
+      })
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>

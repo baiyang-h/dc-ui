@@ -5,7 +5,26 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/home',
-    component: () => import('@/views/home')
+    component: () => import('@/views/home'),
+    children: [
+      {
+        path: 'aa',
+        name: 'aa',
+        component: () => import('@/views/home/a.vue'),
+        children: [
+          {
+            path: 'bb',
+            name: 'bb',
+            component: () => import('@/views/home/b.vue')
+          },
+          {
+            path: 'cc',
+            name: 'cc',
+            component: () => import('@/views/home/c.vue')
+          }
+        ]
+      }
+    ]
   },
   {
     path: '/form',
